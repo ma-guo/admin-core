@@ -41,7 +41,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `sys_dict_type` WRITE;
 /*!40000 ALTER TABLE `sys_dict_type` DISABLE KEYS */;
-INSERT INTO `sys_dict_type` VALUES (1,'性别','gender',1,'定义性别类型','2019-12-06 19:03:32','2024-04-29 18:34:52'),(28,'本机存储','local',1,'本机存储','2024-05-06 17:57:02','2024-05-06 17:57:02'),(29,'七牛存储','qiniu',1,'七牛存储','2024-05-06 17:57:02','2024-05-06 17:57:02'),(30,'阿里云存储','aliyun',1,'阿里云存储','2024-05-06 17:57:02','2024-05-06 17:57:02'),(31,'腾讯云存储','tencent',1,'腾讯云存储','2024-05-06 17:57:02','2024-05-06 17:57:02');
+INSERT INTO `sys_dict_type` VALUES (1,'性别','gender',1,'定义性别类型','2019-12-06 19:03:32','2024-04-29 18:34:52');
 /*!40000 ALTER TABLE `sys_dict_type` ENABLE KEYS */;
 UNLOCK TABLES;
 

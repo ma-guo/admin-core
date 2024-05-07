@@ -44,6 +44,10 @@ func LoadConfig(path string) error {
 	if err := initDatabases(); err != nil {
 		return err
 	}
+	err = initDatabaseData()
+	if err != nil {
+		niuhe.LogInfo("init database data error: %v", err)
+	}
 	return nil
 }
 

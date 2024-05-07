@@ -142,7 +142,6 @@ func GetSyncModels() []interface{} {
 		new(SysRoleMenu),
 		new(SysUser),
 		new(SysUserRole),
-		new(SysUser),
 		new(SysFile),
 		new(SysVendor),
 	}
