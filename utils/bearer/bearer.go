@@ -26,7 +26,7 @@ func NewBearer(uid int64, username string) *Bearer {
 	}
 }
 
-const secretKey string = "admin-core-secret-key"
+const secretKey string = "admincore-secret-key"
 
 // 生成 token
 func (bea *Bearer) GenToken() error {
