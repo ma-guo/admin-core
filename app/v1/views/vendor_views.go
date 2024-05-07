@@ -43,16 +43,7 @@ func (v *Vendor) Init_GET(c *niuhe.Context, req *protos.NoneReq, rsp *protos.Non
 	}
 	svc := services.NewSvc()
 	defer svc.Close()
-	chioces := consts.FileVendorEnum.GetChoices()
-	for value, name := range chioces {
-		// niuhe.LogInfo("name: %v, value: %v", name, value)
-		svc.DictType().Add(&models.SysDictType{
-			Name:   name,
-			Code:   value,
-			Remark: name,
-			Status: consts.CommStatusEnum.Enable.Value,
-		})
-	}
+
 	type VendorRow struct {
 		Vendor niuhe.StringConstItem
 		Name   string
