@@ -9,10 +9,7 @@ import (
 	"github.com/ziipin-server/niuhe"
 )
 
-type boot struct{}
-
 type AdminBoot struct {
-	boot
 	protocol niuhe.IApiProtocol
 }
 
@@ -27,7 +24,7 @@ func (AdminBoot) InitConfig(conf config.AdminConfig) error {
 
 func (AdminBoot) BeforeBoot(svr *niuhe.Server) {}
 
-func (admin AdminBoot) RegisterModules(svr *niuhe.Server) {
+func (admin *AdminBoot) RegisterModules(svr *niuhe.Server) {
 	if admin.protocol != nil {
 		apiViews.SetProtocol(admin.protocol)
 	}
@@ -38,7 +35,13 @@ func (AdminBoot) Serve(svr *niuhe.Server) {
 	svr.Serve(config.Config.ServerAddr)
 }
 
+// 设置协议, 如果需要更改 请求和返回结构, 可调用本方法处理, 具体实现参考 app/v1/views/init_protocol.go
+func (admin *AdminBoot) SetProtocol(protocol niuhe.IApiProtocol) {
+	admin.protocol = protocol
+}
+
 // func main() {
+// 	gin.SetMode(gin.ReleaseMode)
 // 	if len(os.Args) < 2 {
 // 		niuhe.LogInfo("usage: %s <config-path>", os.Args[0])
 // 		return
