@@ -28,3 +28,5 @@ func main() {
 	boot.Serve(svr)
 }
 ```
+
+前端搭配项目为 [vue3-element-admin](https://github.com/ma-guo/vue3-element-admin), 本项目相关 api idl 项目为 [admin-core-niuhe](https://github.com/ma-guo/admin-core-niuhe)
