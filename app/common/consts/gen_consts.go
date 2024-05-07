@@ -4,66 +4,71 @@ package consts
 
 import "github.com/ziipin-server/niuhe"
 
+// 通用状态枚举
 var CommStatusEnum struct {
 	*niuhe.IntConstGroup
-	Enable  niuhe.IntConstItem `name:"启用" value:"1"` // 启用
-	Disable niuhe.IntConstItem `name:"停用" value:"0"` // 停用
+	Enable  niuhe.IntConstItem `name:"启用" value:"1"` // value: 1, name: 启用
+	Disable niuhe.IntConstItem `name:"停用" value:"0"` // value: 0, name: 停用
 }
 
+// 用户性别定义
 var GenderEnum struct {
 	*niuhe.IntConstGroup
-	Unknow niuhe.IntConstItem `name:"未知" value:"0"` // 未知
-	Man    niuhe.IntConstItem `name:"男" value:"1"`  // 男
-	Woman  niuhe.IntConstItem `name:"女" value:"2"`  // 女
+	Unknow niuhe.IntConstItem `name:"未知" value:"0"` // value: 0, name: 未知
+	Man    niuhe.IntConstItem `name:"男" value:"1"`  // value: 1, name: 男
+	Woman  niuhe.IntConstItem `name:"女" value:"2"`  // value: 2, name: 女
 }
 
+// 数据权限
 var DataScopeEnum struct {
 	*niuhe.IntConstGroup
-	All     niuhe.IntConstItem `name:"所有数据" value:"0"`     // 所有数据
-	DeptSub niuhe.IntConstItem `name:"部门及子部门数据" value:"1"` // 部门及子部门数据
-	Dept    niuhe.IntConstItem `name:"本部门数据" value:"2"`    // 本部门数据
-	Self    niuhe.IntConstItem `name:"本人数据" value:"3"`     // 本人数据
+	All     niuhe.IntConstItem `name:"所有数据" value:"0"`     // value: 0, name: 所有数据
+	DeptSub niuhe.IntConstItem `name:"部门及子部门数据" value:"1"` // value: 1, name: 部门及子部门数据
+	Dept    niuhe.IntConstItem `name:"本部门数据" value:"2"`    // value: 2, name: 本部门数据
+	Self    niuhe.IntConstItem `name:"本人数据" value:"3"`     // value: 3, name: 本人数据
 }
 
+// 菜单状态枚举
 var MenuStatusEnum struct {
 	*niuhe.IntConstGroup
-	Visible   niuhe.IntConstItem `name:"显示" value:"1"` // 显示
-	InVisible niuhe.IntConstItem `name:"隐藏" value:"0"` // 隐藏
+	Visible   niuhe.IntConstItem `name:"显示" value:"1"` // value: 1, name: 显示
+	InVisible niuhe.IntConstItem `name:"隐藏" value:"0"` // value: 0, name: 隐藏
 }
 
 var MenuTypeEnum struct {
 	*niuhe.StringConstGroup
-	NULL    niuhe.StringConstItem `name:"无类型" value:"NULL"`   // 无类型
-	CATALOG niuhe.StringConstItem `name:"目录" value:"CATALOG"` // 目录
-	MENU    niuhe.StringConstItem `name:"菜单" value:"MENU"`    // 菜单
-	BUTTON  niuhe.StringConstItem `name:"按钮" value:"BUTTON"`  // 按钮
-	EXTLINK niuhe.StringConstItem `name:"外链" value:"EXTLINK"` // 外链
+	NULL    niuhe.StringConstItem `name:"无类型" value:"NULL"`   // value: NULL, name: 无类型
+	CATALOG niuhe.StringConstItem `name:"目录" value:"CATALOG"` // value: CATALOG, name: 目录
+	MENU    niuhe.StringConstItem `name:"菜单" value:"MENU"`    // value: MENU, name: 菜单
+	BUTTON  niuhe.StringConstItem `name:"按钮" value:"BUTTON"`  // value: BUTTON, name: 按钮
+	EXTLINK niuhe.StringConstItem `name:"外链" value:"EXTLINK"` // value: EXTLINK, name: 外链
 }
 
+// 菜单类型组
 var MenuTypeGroup struct {
 	*niuhe.IntConstGroup
-	MENU    niuhe.IntConstItem `name:"MENU" value:"1"`    // MENU
-	CATALOG niuhe.IntConstItem `name:"CATALOG" value:"2"` // CATALOG
-	EXTLINK niuhe.IntConstItem `name:"EXTLINK" value:"3"` // EXTLINK
-	BUTTON  niuhe.IntConstItem `name:"BUTTON" value:"4"`  // BUTTON
+	MENU    niuhe.IntConstItem `name:"MENU" value:"1"`    // value: 1, name: MENU
+	CATALOG niuhe.IntConstItem `name:"CATALOG" value:"2"` // value: 2, name: CATALOG
+	EXTLINK niuhe.IntConstItem `name:"EXTLINK" value:"3"` // value: 3, name: EXTLINK
+	BUTTON  niuhe.IntConstItem `name:"BUTTON" value:"4"`  // value: 4, name: BUTTON
 }
 
 var QiniuZoneEnum struct {
 	*niuhe.StringConstGroup
-	Huadong   niuhe.StringConstItem `name:"华东机房" value:"ZoneHuadong"`              // 华东机房
-	Huabei    niuhe.StringConstItem `name:"华北机房" value:"ZoneHuabei"`               // 华北机房
-	Huanan    niuhe.StringConstItem `name:"华南机房" value:"ZoneHuanan"`               // 华南机房
-	Beimei    niuhe.StringConstItem `name:"北美机房" value:"ZoneBeimei"`               // 北美机房
-	Xinjiapo  niuhe.StringConstItem `name:"新加坡机房" value:"ZoneXinjiapo"`            // 新加坡机房
-	ZheJiang2 niuhe.StringConstItem `name:"华东浙江 2 区" value:"ZoneHuadongZheJiang2"` // 华东浙江 2 区
+	Huadong   niuhe.StringConstItem `name:"华东机房" value:"ZoneHuadong"`              // value: ZoneHuadong, name: 华东机房
+	Huabei    niuhe.StringConstItem `name:"华北机房" value:"ZoneHuabei"`               // value: ZoneHuabei, name: 华北机房
+	Huanan    niuhe.StringConstItem `name:"华南机房" value:"ZoneHuanan"`               // value: ZoneHuanan, name: 华南机房
+	Beimei    niuhe.StringConstItem `name:"北美机房" value:"ZoneBeimei"`               // value: ZoneBeimei, name: 北美机房
+	Xinjiapo  niuhe.StringConstItem `name:"新加坡机房" value:"ZoneXinjiapo"`            // value: ZoneXinjiapo, name: 新加坡机房
+	ZheJiang2 niuhe.StringConstItem `name:"华东浙江 2 区" value:"ZoneHuadongZheJiang2"` // value: ZoneHuadongZheJiang2, name: 华东浙江 2 区
 }
 
 var FileVendorEnum struct {
 	*niuhe.StringConstGroup
-	Local   niuhe.StringConstItem `name:"本机存储" value:"local"`    // 本机存储
-	Qiniu   niuhe.StringConstItem `name:"七牛存储" value:"qiniu"`    // 七牛存储
-	Aliyun  niuhe.StringConstItem `name:"阿里云存储" value:"aliyun"`  // 阿里云存储
-	Tencent niuhe.StringConstItem `name:"腾讯云存储" value:"tencent"` // 腾讯云存储
+	Local   niuhe.StringConstItem `name:"本机存储" value:"local"`    // value: local, name: 本机存储
+	Qiniu   niuhe.StringConstItem `name:"七牛存储" value:"qiniu"`    // value: qiniu, name: 七牛存储
+	Aliyun  niuhe.StringConstItem `name:"阿里云存储" value:"aliyun"`  // value: aliyun, name: 阿里云存储
+	Tencent niuhe.StringConstItem `name:"腾讯云存储" value:"tencent"` // value: tencent, name: 腾讯云存储
 }
 
 func init() {
