@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/ma-guo/admin-core/app/common/consts"
 	"github.com/ma-guo/admin-core/xorm/models"
 )
 
@@ -50,6 +51,11 @@ func (svc *_MenuSvc) Delete(mid int64) error {
 }
 
 func (svc *_MenuSvc) Insert(row *models.SysMenu) (*models.SysMenu, error) {
+	if row.Type == consts.MenuTypeGroup.CATALOG.Value {
+		if row.Component == "" {
+			row.Component = "Layout"
+		}
+	}
 	_, err := svc.dao().Menu().Insert(row)
 	if err != nil {
 		return nil, err
