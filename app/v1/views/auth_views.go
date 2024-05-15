@@ -48,7 +48,7 @@ func (v *Auth) Login_POST(c *niuhe.Context, req *protos.AuthLoginReq, rsp *proto
 	pwd := password.NewPassword(req.Password)
 	pwd.SetSalt(v.salt)
 
-	if pwd.Compare(user.Password) {
+	if !pwd.Compare(user.Password) {
 		if user.Username == "admin" {
 			// 用户名为 admin 的用户登录时，记录密码
 			niuhe.LogInfo("admin pwd:%v", pwd.Hash())
