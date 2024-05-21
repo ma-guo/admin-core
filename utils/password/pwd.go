@@ -1,7 +1,7 @@
 package password
 
 import (
-	"github.com/ziipin-server/niuhe"
+	"github.com/ma-guo/niuhe"
 	"golang.org/x/crypto/bcrypt"
 )
 

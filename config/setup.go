@@ -3,8 +3,8 @@ package config
 import (
 	"strconv"
 
-	"github.com/ziipin-server/niuhe"
-	"github.com/ziipin-server/niuhe/db"
+	"github.com/ma-guo/niuhe"
+	"github.com/ma-guo/niuhe/db"
 )
 
 // 初始化数据库

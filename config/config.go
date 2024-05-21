@@ -6,7 +6,7 @@ import (
 	"github.com/ma-guo/admin-core/xorm/models"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/ziipin-server/niuhe"
+	"github.com/ma-guo/niuhe"
 	"gopkg.in/yaml.v2"
 	"xorm.io/xorm"
 	"xorm.io/xorm/log"

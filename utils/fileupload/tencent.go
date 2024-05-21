@@ -9,8 +9,8 @@ import (
 
 	"github.com/ma-guo/admin-core/app/common/consts"
 
+	"github.com/ma-guo/niuhe"
 	"github.com/tencentyun/cos-go-sdk-v5"
-	"github.com/ziipin-server/niuhe"
 )
 
 type Tencent struct {

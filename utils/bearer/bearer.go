@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/ziipin-server/niuhe"
+	"github.com/ma-guo/niuhe"
 )
 
 // {"Username":"dequankim","Uid":0,"ExpiresAt":1714562882,"Token":"","aud":"dequankim","exp":1714562882,"nbf":1713957482}

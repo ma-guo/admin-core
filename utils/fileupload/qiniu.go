@@ -6,9 +6,9 @@ import (
 
 	"github.com/ma-guo/admin-core/app/common/consts"
 
+	"github.com/ma-guo/niuhe"
 	"github.com/qiniu/go-sdk/v7/auth"
 	"github.com/qiniu/go-sdk/v7/auth/qbox"
-	"github.com/ziipin-server/niuhe"
 
 	"github.com/qiniu/go-sdk/v7/storage"
 )

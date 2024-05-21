@@ -5,7 +5,7 @@ import (
 
 	"github.com/ma-guo/admin-core/xorm/models"
 
-	"github.com/ziipin-server/niuhe"
+	"github.com/ma-guo/niuhe"
 )
 
 type _RoleSvc struct {

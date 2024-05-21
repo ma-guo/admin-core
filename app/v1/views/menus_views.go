@@ -11,7 +11,7 @@ import (
 	"github.com/ma-guo/admin-core/xorm/models"
 	"github.com/ma-guo/admin-core/xorm/services"
 
-	"github.com/ziipin-server/niuhe"
+	"github.com/ma-guo/niuhe"
 )
 
 type Menus struct {

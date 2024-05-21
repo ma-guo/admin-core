@@ -10,9 +10,9 @@ import (
 
 	"github.com/ma-guo/admin-core/app/common/consts"
 
+	"github.com/ma-guo/niuhe"
+	"github.com/ma-guo/zpform"
 	cache "github.com/patrickmn/go-cache"
-	"github.com/ziipin-server/niuhe"
-	"github.com/ziipin-server/zpform"
 )
 
 // 做简单的攻击检测

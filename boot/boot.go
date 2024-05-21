@@ -6,7 +6,7 @@ import (
 	apiViews "github.com/ma-guo/admin-core/app/v1/views"
 	"github.com/ma-guo/admin-core/config"
 
-	"github.com/ziipin-server/niuhe"
+	"github.com/ma-guo/niuhe"
 )
 
 type AdminBoot struct {

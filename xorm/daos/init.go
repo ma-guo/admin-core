@@ -6,8 +6,8 @@ import (
 
 	"github.com/ma-guo/admin-core/config"
 
+	"github.com/ma-guo/niuhe/db"
 	cache "github.com/patrickmn/go-cache"
-	"github.com/ziipin-server/niuhe/db"
 	"xorm.io/xorm"
 )
 

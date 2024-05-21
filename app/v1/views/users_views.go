@@ -15,8 +15,8 @@ import (
 	"github.com/ma-guo/admin-core/xorm/models"
 	"github.com/ma-guo/admin-core/xorm/services"
 
+	"github.com/ma-guo/niuhe"
 	"github.com/xuri/excelize/v2"
-	"github.com/ziipin-server/niuhe"
 )
 
 type Users struct {

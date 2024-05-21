@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/ma-guo/admin-core/boot"
-	"github.com/ziipin-server/niuhe"
+	"github.com/ma-guo/niuhe"
 )
 
 func main() {

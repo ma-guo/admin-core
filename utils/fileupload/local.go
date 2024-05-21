@@ -9,7 +9,7 @@ import (
 	"github.com/ma-guo/admin-core/config"
 	"github.com/ma-guo/admin-core/utils"
 
-	"github.com/ziipin-server/niuhe"
+	"github.com/ma-guo/niuhe"
 )
 
 // 本机存储

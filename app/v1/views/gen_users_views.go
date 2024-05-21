@@ -5,7 +5,7 @@ package views
 import (
 	"github.com/ma-guo/admin-core/app/v1/protos"
 
-	"github.com/ziipin-server/niuhe"
+	"github.com/ma-guo/niuhe"
 )
 
 type _Gen_Users struct{}

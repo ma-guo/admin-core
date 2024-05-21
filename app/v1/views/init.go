@@ -8,8 +8,8 @@ import (
 	"github.com/ma-guo/admin-core/app/common/consts"
 	"github.com/ma-guo/admin-core/utils/bearer"
 
+	"github.com/ma-guo/niuhe"
 	cache "github.com/patrickmn/go-cache"
-	"github.com/ziipin-server/niuhe"
 )
 
 // 格式化错误应答

@@ -6,7 +6,7 @@ import (
 	"github.com/ma-guo/admin-core/app/common/consts"
 
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
-	"github.com/ziipin-server/niuhe"
+	"github.com/ma-guo/niuhe"
 )
 
 type Aliyun struct {
