@@ -32,6 +32,7 @@ func (v *Roles) Page_GET(c *niuhe.Context, req *protos.V1RolesPageReq, rsp *prot
 			Name:       role.Name,
 			Status:     role.Status,
 			Sort:       role.Sort,
+			Code:       role.Code,
 			CreateTime: role.CreateTime.Format(consts.FullTimeLayout),
 			UpdateTime: role.UpdateTime.Format(consts.FullTimeLayout),
 		})
