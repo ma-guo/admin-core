@@ -47,13 +47,8 @@ var thisModule *niuhe.Module
 // 自定义的协议处理
 var protocol *V1ApiProtocol
 
-// 如果需要使用自己的协议，可以在这里设置
-func SetProtocol(proxy niuhe.IApiProtocol) {
-	protocol.proxy = proxy
-}
-
-func GetModule() *niuhe.Module {
-	if thisModule == nil {
+func GetProtocol() *V1ApiProtocol {
+	if protocol == nil {
 		protocol = &V1ApiProtocol{
 			store: cache.New(1*time.Minute, 5*time.Second),
 			skipUrl: map[string]bool{
@@ -63,9 +58,26 @@ func GetModule() *niuhe.Module {
 			},
 			proxy: nil,
 		}
+	}
+
+	return protocol
+}
+
+// 如果需要使用自己的协议，可以在这里设置
+func SetProtocol(proxy niuhe.IApiProtocol) {
+	GetProtocol().proxy = proxy
+}
+
+// 添加跳过路由
+func AddSkipUrl(url string) {
+	GetProtocol().skipUrl[url] = true
+}
+
+func GetModule() *niuhe.Module {
+	if thisModule == nil {
 		// 在路由前统一添加 api 前缀
 		thisModule = niuhe.NewModuleWithProtocolFactoryFunc("api/v1", func() niuhe.IApiProtocol {
-			return protocol
+			return GetProtocol()
 		})
 		// thisModule = niuhe.NewModule("api")
 	}

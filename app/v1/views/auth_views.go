@@ -7,6 +7,7 @@ import (
 
 	"github.com/ma-guo/admin-core/app/common/consts"
 	"github.com/ma-guo/admin-core/app/v1/protos"
+	"github.com/ma-guo/admin-core/config"
 	"github.com/ma-guo/admin-core/utils/bearer"
 	"github.com/ma-guo/admin-core/utils/captcha"
 	"github.com/ma-guo/admin-core/utils/password"
@@ -60,7 +61,7 @@ func (v *Auth) Login_POST(c *niuhe.Context, req *protos.AuthLoginReq, rsp *proto
 		return niuhe.NewCommError(-1, "账号已被禁用")
 	}
 
-	jwt := bearer.NewBearer(user.Id, req.Username)
+	jwt := bearer.NewBearer(config.Config.Secretkey, user.Id, req.Username)
 	err = jwt.GenToken()
 	if err != nil {
 		niuhe.LogInfo("%v", err)
@@ -80,7 +81,7 @@ func (v *Auth) Logout_POST(c *niuhe.Context, req *protos.NoneReq, rsp *protos.No
 		return niuhe.NewCommError(-1, "token error")
 	}
 	token = token[len(consts.Bearer)+1:]
-	jtw := bearer.NewBearer(0, "")
+	jtw := bearer.NewBearer(config.Config.Secretkey, 0, "")
 	err := jtw.Parse(token)
 	if err != nil {
 		niuhe.LogInfo("%v", err)

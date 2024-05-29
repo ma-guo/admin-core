@@ -6,6 +6,7 @@ import (
 	"reflect"
 	"time"
 
+	"github.com/ma-guo/admin-core/config"
 	"github.com/ma-guo/admin-core/utils/bearer"
 
 	"github.com/ma-guo/admin-core/app/common/consts"
@@ -42,7 +43,7 @@ func (proto V1ApiProtocol) checkAuth(c *niuhe.Context) error {
 		c.Set(consts.Authorization, jwt)
 		return nil
 	}
-	jtw := bearer.NewBearer(0, "")
+	jtw := bearer.NewBearer(config.Config.Secretkey, 0, "")
 	err := jtw.Parse(token)
 	if err != nil {
 		niuhe.LogInfo("%v", err)
