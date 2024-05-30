@@ -56,7 +56,7 @@ func (dao *_DictDao) Insert(row *models.SysDict) (bool, error) {
 }
 
 func (dao *_DictDao) Update(id int64, row *models.SysDict) (bool, error) {
-	affected, err := dao.db().Where("id=?", id).Update(row)
+	affected, err := dao.db().Where("id=?", id).AllCols().Update(row)
 	return affected > 0, err
 }
 

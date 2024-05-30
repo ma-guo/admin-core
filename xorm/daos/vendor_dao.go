@@ -56,7 +56,7 @@ func (dao *_VendorDao) Insert(row *models.SysVendor) (bool, error) {
 }
 
 func (dao *_VendorDao) Update(id int64, row *models.SysVendor) (bool, error) {
-	affected, err := dao.db().Where("id=?", id).Update(row)
+	affected, err := dao.db().Where("id=?", id).AllCols().Update(row)
 	return affected > 0, err
 }
 

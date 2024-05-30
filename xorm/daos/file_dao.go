@@ -67,7 +67,7 @@ func (dao *_FileDao) Insert(row *models.SysFile) (bool, error) {
 }
 
 func (dao *_FileDao) Update(id int64, row *models.SysFile) (bool, error) {
-	affected, err := dao.db().Where("id=?", id).AllCols().Update(row)
+	affected, err := dao.db().Where("id=?", id).AllCols().AllCols().Update(row)
 	return affected > 0, err
 }
 

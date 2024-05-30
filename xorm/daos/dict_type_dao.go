@@ -44,7 +44,7 @@ func (dao *_DictTypeDao) Insert(row *models.SysDictType) (bool, error) {
 }
 
 func (dao *_DictTypeDao) Update(id int64, row *models.SysDictType) (bool, error) {
-	affected, err := dao.db().Where("id=?", id).Update(row)
+	affected, err := dao.db().Where("id=?", id).AllCols().Update(row)
 	return affected > 0, err
 }
 

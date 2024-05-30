@@ -52,7 +52,7 @@ func (dao *_DeptDao) Insert(row *models.SysDept) (bool, error) {
 }
 
 func (dao *_DeptDao) Update(id int64, row *models.SysDept) (bool, error) {
-	affected, err := dao.db().Where("id=?", id).Update(row)
+	affected, err := dao.db().Where("id=?", id).AllCols().Update(row)
 	return affected > 0, err
 }
 
