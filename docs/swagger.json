@@ -23,7 +23,11 @@
         "/v1/auth/login/": {
             "post": {
                 "description": "登录",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "登录认证"
                 ],
@@ -88,7 +92,11 @@
         "/v1/auth/logout/": {
             "post": {
                 "description": "登出",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "登录认证"
                 ],
@@ -119,7 +127,11 @@
         "/v1/auth/captcha/": {
             "get": {
                 "description": "获取验证码",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "登录认证"
                 ],
@@ -155,7 +167,11 @@
         "/v1/users/me/": {
             "get": {
                 "description": "获取当前登录用户信息",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "用户管理"
                 ],
@@ -193,7 +209,11 @@
         "/v1/users/page/": {
             "get": {
                 "description": "用户分页列表",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "用户管理"
                 ],
@@ -277,7 +297,11 @@
         "/v1/users/add/": {
             "post": {
                 "description": "新增用户",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "用户管理"
                 ],
@@ -395,7 +419,11 @@
         "/v1/users/form/": {
             "get": {
                 "description": "用户表单",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "用户管理"
                 ],
@@ -445,7 +473,11 @@
         "/v1/users/update/": {
             "post": {
                 "description": "修改用户",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "用户管理"
                 ],
@@ -556,7 +588,11 @@
         "/v1/users/delete/": {
             "post": {
                 "description": "删除用户",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "用户管理"
                 ],
@@ -595,7 +631,11 @@
         "/v1/users/export/": {
             "get": {
                 "description": "导出用户",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "用户管理"
                 ],
@@ -676,7 +716,11 @@
         "/v1/users/template/": {
             "get": {
                 "description": "用户导入模板下载",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "用户管理"
                 ],
@@ -707,7 +751,11 @@
         "/v1/users/import/": {
             "post": {
                 "description": "用户导入",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "用户管理"
                 ],
@@ -738,7 +786,11 @@
         "/v1/users/password/": {
             "post": {
                 "description": "修改密码",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "用户管理"
                 ],
@@ -784,7 +836,11 @@
         "/v1/users/status/": {
             "post": {
                 "description": "修改用户状态",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "用户管理"
                 ],
@@ -834,7 +890,11 @@
         "/v1/roles/page/": {
             "get": {
                 "description": "角色分页列表",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "角色管理"
                 ],
@@ -890,7 +950,11 @@
         "/v1/roles/options/": {
             "get": {
                 "description": "角色下拉列表",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "角色管理"
                 ],
@@ -923,7 +987,11 @@
         "/v1/roles/add/": {
             "post": {
                 "description": "新增角色",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "角色管理"
                 ],
@@ -1007,7 +1075,11 @@
         "/v1/roles/form/": {
             "get": {
                 "description": "角色表单数据",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "角色管理"
                 ],
@@ -1053,7 +1125,11 @@
         "/v1/roles/update/": {
             "post": {
                 "description": "修改角色信息",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "角色管理"
                 ],
@@ -1137,7 +1213,11 @@
         "/v1/roles/delete/": {
             "post": {
                 "description": "删除角色",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "角色管理"
                 ],
@@ -1176,7 +1256,11 @@
         "/v1/roles/menuids/": {
             "get": {
                 "description": "获取角色的菜单ID集合",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "角色管理"
                 ],
@@ -1217,7 +1301,11 @@
         "/v1/roles/menus/": {
             "post": {
                 "description": "分配菜单权限给角色",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "角色管理"
                 ],
@@ -1263,7 +1351,11 @@
         "/v1/roles/status/": {
             "post": {
                 "description": "修改角色状态",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "角色管理"
                 ],
@@ -1313,7 +1405,11 @@
         "/v1/menus/list/": {
             "get": {
                 "description": "菜单列表",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "菜单管理"
                 ],
@@ -1378,7 +1474,11 @@
         "/v1/menus/delete/": {
             "post": {
                 "description": "删除菜单",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "菜单管理"
                 ],
@@ -1417,7 +1517,11 @@
         "/v1/menus/add/": {
             "post": {
                 "description": "新增菜单",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "菜单管理"
                 ],
@@ -1551,7 +1655,11 @@
         "/v1/menus/options/": {
             "get": {
                 "description": "菜单下拉列表",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "菜单管理"
                 ],
@@ -1584,7 +1692,11 @@
         "/v1/menus/routes/": {
             "get": {
                 "description": "路由列表",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "菜单管理"
                 ],
@@ -1617,7 +1729,11 @@
         "/v1/menus/form/": {
             "get": {
                 "description": "菜单表单",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "菜单管理"
                 ],
@@ -1670,7 +1786,11 @@
         "/v1/menus/update/": {
             "post": {
                 "description": "修改菜单",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "菜单管理"
                 ],
@@ -1804,7 +1924,11 @@
         "/v1/menus/status/": {
             "post": {
                 "description": "修改菜单状态",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "菜单管理"
                 ],
@@ -1854,7 +1978,11 @@
         "/v1/dept/list/": {
             "get": {
                 "description": "获取部门列表",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "部门管理"
                 ],
@@ -1906,7 +2034,11 @@
         "/v1/dept/add/": {
             "post": {
                 "description": "添加部门",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "部门管理"
                 ],
@@ -1977,7 +2109,11 @@
         "/v1/dept/options/": {
             "get": {
                 "description": "获取部门下拉列表",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "部门管理"
                 ],
@@ -2010,7 +2146,11 @@
         "/v1/dept/update/": {
             "post": {
                 "description": "修改部门",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "部门管理"
                 ],
@@ -2081,7 +2221,11 @@
         "/v1/dept/form/": {
             "get": {
                 "description": "获取部门表单数据",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "部门管理"
                 ],
@@ -2126,7 +2270,11 @@
         "/v1/dept/delete/": {
             "post": {
                 "description": "删除部门",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "部门管理"
                 ],
@@ -2165,7 +2313,11 @@
         "/v1/dict/page/": {
             "get": {
                 "description": "字典分页列表",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "字典管理"
                 ],
@@ -2228,7 +2380,11 @@
         "/v1/dict/options/": {
             "get": {
                 "description": "字典下拉列表",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "字典管理"
                 ],
@@ -2269,7 +2425,11 @@
         "/v1/dict/form/": {
             "get": {
                 "description": "字典数据表单数据",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "字典管理"
                 ],
@@ -2316,7 +2476,11 @@
         "/v1/dict/add/": {
             "post": {
                 "description": "新增字典",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "字典管理"
                 ],
@@ -2401,7 +2565,11 @@
         "/v1/dict/update/": {
             "post": {
                 "description": "修改字典",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "字典管理"
                 ],
@@ -2486,7 +2654,11 @@
         "/v1/dict/delete/": {
             "post": {
                 "description": "删除字典",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "字典管理"
                 ],
@@ -2525,7 +2697,11 @@
         "/v1/dict_types/page/": {
             "get": {
                 "description": "字典类型分页列表",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "字典类型"
                 ],
@@ -2581,7 +2757,11 @@
         "/v1/dict_types/form/": {
             "get": {
                 "description": "字典类型表单",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "字典类型"
                 ],
@@ -2626,7 +2806,11 @@
         "/v1/dict_types/add/": {
             "post": {
                 "description": "新增字典类型",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "字典类型"
                 ],
@@ -2697,7 +2881,11 @@
         "/v1/dict_types/update/": {
             "post": {
                 "description": "修改字典类型",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "字典类型"
                 ],
@@ -2768,7 +2956,11 @@
         "/v1/dict_types/delete/": {
             "post": {
                 "description": "删除字典类型",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "字典类型"
                 ],
@@ -2807,7 +2999,11 @@
         "/v1/files/upload/": {
             "post": {
                 "description": "文件上传请求",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "文件管理"
                 ],
@@ -2841,7 +3037,11 @@
         "/v1/files/delete/": {
             "post": {
                 "description": "文件删除请求",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "文件管理"
                 ],
@@ -2880,7 +3080,11 @@
         "/v1/files/fetch/": {
             "get": {
                 "description": "文件下载请求",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "文件管理"
                 ],
@@ -2919,7 +3123,11 @@
         "/v1/files/page/": {
             "get": {
                 "description": "文件分页请求",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "文件管理"
                 ],
@@ -2982,7 +3190,11 @@
         "/v1/files/form/": {
             "get": {
                 "description": "文件修改弹窗请求",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "文件管理"
                 ],
@@ -3030,7 +3242,11 @@
         "/v1/files/update/": {
             "post": {
                 "description": "文件修改请求",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "文件管理"
                 ],
@@ -3076,7 +3292,11 @@
         "/v1/vendor/zones/": {
             "get": {
                 "description": "获取文件存储区域",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "存储提供商"
                 ],
@@ -3109,7 +3329,11 @@
         "/v1/vendor/init/": {
             "get": {
                 "description": "初始化文件提供商参数",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "存储提供商"
                 ],
@@ -3140,7 +3364,11 @@
         "/v1/vendor/list/": {
             "get": {
                 "description": "获取文件存储提供商列表",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "存储提供商"
                 ],
@@ -3182,7 +3410,11 @@
         "/v1/vendor/page/": {
             "get": {
                 "description": "文件配置列表",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "存储提供商"
                 ],
@@ -3238,7 +3470,11 @@
         "/v1/vendor/form/": {
             "get": {
                 "description": "获取配置项详情值",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "存储提供商"
                 ],
@@ -3288,7 +3524,11 @@
         "/v1/vendor/update/": {
             "post": {
                 "description": "更新配置项",
-                "security": [],
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ],
                 "tags": [
                     "存储提供商"
                 ],
@@ -5812,6 +6052,13 @@
                 "value",
                 "remark"
             ]
+        }
+    },
+    "securityDefinitions": {
+        "bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }
