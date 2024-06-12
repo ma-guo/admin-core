@@ -1,0 +1,5817 @@
+{
+    "consumes": [
+        "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "title": "admin-core api 文档",
+        "description": "基于 Vue3 + Vite5+ TypeScript5 + Element-Plus + Pinia 等主流技术栈构建的免费开源的后台管理前端模板 go 版后端管理程序 api 文档",
+        "version": "1.0.0",
+        "license": {
+            "name": "MIT License",
+            "url": "https://github.com/ma-guo/vue3-element-admin/blob/main/LICENSE"
+        }
+    },
+    "paths": {
+        "/v1/auth/login/": {
+            "post": {
+                "description": "登录",
+                "security": [],
+                "tags": [
+                    "登录认证"
+                ],
+                "summary": "登录",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "用户名"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "密码"
+                    },
+                    {
+                        "name": "captchaKey",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "验证码key"
+                    },
+                    {
+                        "name": "captchaCode",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "验证码"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "登录返回参数",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.AauthLoginRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "accessToken": "",
+                                    "tokenType": "",
+                                    "refreshToken": "",
+                                    "expiresIn": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/auth/logout/": {
+            "post": {
+                "description": "登出",
+                "security": [],
+                "tags": [
+                    "登录认证"
+                ],
+                "summary": "登出",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/auth/captcha/": {
+            "get": {
+                "description": "获取验证码",
+                "security": [],
+                "tags": [
+                    "登录认证"
+                ],
+                "summary": "获取验证码",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "验证码返回参数",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.AuthCaptchaRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "captchaKey": "",
+                                    "captchaBase64": "",
+                                    "width": 0,
+                                    "height": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/users/me/": {
+            "get": {
+                "description": "获取当前登录用户信息",
+                "security": [],
+                "tags": [
+                    "用户管理"
+                ],
+                "summary": "获取当前登录用户信息",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "获取当前登录用户信息返回参数",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1UsersMeRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "userId": 0,
+                                    "username": "",
+                                    "nickname": "",
+                                    "avatar": "",
+                                    "roles": "",
+                                    "perms": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/users/page/": {
+            "get": {
+                "description": "用户分页列表",
+                "security": [],
+                "tags": [
+                    "用户管理"
+                ],
+                "summary": "用户分页列表",
+                "parameters": [
+                    {
+                        "name": "keywords",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "关键字"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "用户状态"
+                    },
+                    {
+                        "name": "deptId",
+                        "in": "query",
+                        "required": false,
+                        "type": "number",
+                        "description": "部门ID"
+                    },
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "页码"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "每页条数"
+                    },
+                    {
+                        "name": "startTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "开始时间-年月日"
+                    },
+                    {
+                        "name": "endTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "结束时间-年月日"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "用户分页列表返回参数",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1UsersPageRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "total": 0,
+                                    "list": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/users/add/": {
+            "post": {
+                "description": "新增用户",
+                "security": [],
+                "tags": [
+                    "用户管理"
+                ],
+                "summary": "新增用户",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "number",
+                        "description": "用户ID"
+                    },
+                    {
+                        "name": "username",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "用户名"
+                    },
+                    {
+                        "name": "nickname",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "用户昵称"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "密码"
+                    },
+                    {
+                        "name": "mobile",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "手机号"
+                    },
+                    {
+                        "name": "gender",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "性别 取值范围及含义: 0 - 未知; 1 - 男; 2 - 女;",
+                        "enum": [
+                            0,
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "name": "avatar",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "头像地址"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "用户邮箱"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "用户状态 取值范围及含义: 1 - 启用; 0 - 停用;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    },
+                    {
+                        "name": "deptId",
+                        "in": "formData",
+                        "required": false,
+                        "type": "number",
+                        "description": "部门ID"
+                    },
+                    {
+                        "name": "roleIds",
+                        "in": "formData",
+                        "required": false,
+                        "type": "number",
+                        "description": "角色ID集合"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/users/form/": {
+            "get": {
+                "description": "用户表单",
+                "security": [],
+                "tags": [
+                    "用户管理"
+                ],
+                "summary": "用户表单",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "query",
+                        "required": true,
+                        "type": "number",
+                        "description": "用户ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "用户表单返回参数",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1UserFormRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "id": 0,
+                                    "username": "",
+                                    "nickname": "",
+                                    "mobile": "",
+                                    "gender": 0,
+                                    "avatar": "",
+                                    "email": "",
+                                    "status": 0,
+                                    "deptId": 0,
+                                    "roleIds": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/users/update/": {
+            "post": {
+                "description": "修改用户",
+                "security": [],
+                "tags": [
+                    "用户管理"
+                ],
+                "summary": "修改用户",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "description": "用户ID"
+                    },
+                    {
+                        "name": "username",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "用户名"
+                    },
+                    {
+                        "name": "nickname",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "用户昵称"
+                    },
+                    {
+                        "name": "mobile",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "手机号"
+                    },
+                    {
+                        "name": "gender",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer",
+                        "description": "用户状态 取值范围及含义: 0 - 未知; 1 - 男; 2 - 女;",
+                        "enum": [
+                            0,
+                            1,
+                            2
+                        ]
+                    },
+                    {
+                        "name": "avatar",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "头像地址"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "用户邮箱"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer",
+                        "description": "用户状态 取值范围及含义: 1 - 启用; 0 - 停用;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    },
+                    {
+                        "name": "deptId",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "description": "部门ID"
+                    },
+                    {
+                        "name": "roleIds",
+                        "in": "formData",
+                        "required": false,
+                        "type": "number",
+                        "description": "角色ID集合"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/users/delete/": {
+            "post": {
+                "description": "删除用户",
+                "security": [],
+                "tags": [
+                    "用户管理"
+                ],
+                "summary": "删除用户",
+                "parameters": [
+                    {
+                        "name": "ids",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "用户ID，多个以英文逗号(,)分割"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/users/export/": {
+            "get": {
+                "description": "导出用户",
+                "security": [],
+                "tags": [
+                    "用户管理"
+                ],
+                "summary": "导出用户",
+                "parameters": [
+                    {
+                        "name": "keywords",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "关键字"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "用户状态"
+                    },
+                    {
+                        "name": "deptId",
+                        "in": "query",
+                        "required": false,
+                        "type": "number",
+                        "description": "部门ID"
+                    },
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "页码"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "每页条数"
+                    },
+                    {
+                        "name": "startTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "开始时间-年月日"
+                    },
+                    {
+                        "name": "endTime",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "结束时间-年月日"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/users/template/": {
+            "get": {
+                "description": "用户导入模板下载",
+                "security": [],
+                "tags": [
+                    "用户管理"
+                ],
+                "summary": "用户导入模板下载",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/users/import/": {
+            "post": {
+                "description": "用户导入",
+                "security": [],
+                "tags": [
+                    "用户管理"
+                ],
+                "summary": "用户导入",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "json response",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.undefined"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/users/password/": {
+            "post": {
+                "description": "修改密码",
+                "security": [],
+                "tags": [
+                    "用户管理"
+                ],
+                "summary": "修改密码",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "description": "用户id"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "新密码"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/users/status/": {
+            "post": {
+                "description": "修改用户状态",
+                "security": [],
+                "tags": [
+                    "用户管理"
+                ],
+                "summary": "修改用户状态",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "description": "用户ID"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer",
+                        "description": "用户状态 取值范围及含义: 1 - 启用; 0 - 停用;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/roles/page/": {
+            "get": {
+                "description": "角色分页列表",
+                "security": [],
+                "tags": [
+                    "角色管理"
+                ],
+                "summary": "角色分页列表",
+                "parameters": [
+                    {
+                        "name": "keywords",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "搜索关键字"
+                    },
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "页码"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "每页数量"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "json response",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1RolesPageRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "list": {},
+                                    "total": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/roles/options/": {
+            "get": {
+                "description": "角色下拉列表",
+                "security": [],
+                "tags": [
+                    "角色管理"
+                ],
+                "summary": "角色下拉列表",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "json response",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1RolesOptiosRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/roles/add/": {
+            "post": {
+                "description": "新增角色",
+                "security": [],
+                "tags": [
+                    "角色管理"
+                ],
+                "summary": "新增角色",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "number",
+                        "description": "角色ID"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "角色名称"
+                    },
+                    {
+                        "name": "code",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "角色编码"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer",
+                        "description": "角色状态 取值范围及含义: 1 - 启用; 0 - 停用;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    },
+                    {
+                        "name": "sort",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "排序"
+                    },
+                    {
+                        "name": "dataScope",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "数据权限 取值范围及含义: 0 - 所有数据; 1 - 部门及子部门数据; 2 - 本部门数据; 3 - 本人数据;",
+                        "enum": [
+                            0,
+                            1,
+                            2,
+                            3
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/roles/form/": {
+            "get": {
+                "description": "角色表单数据",
+                "security": [],
+                "tags": [
+                    "角色管理"
+                ],
+                "summary": "角色表单数据",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "type": "number",
+                        "description": "角色ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "角色表单数据",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1RolesFormRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "id": 0,
+                                    "name": "",
+                                    "code": "",
+                                    "status": 0,
+                                    "sort": 0,
+                                    "dataScope": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/roles/update/": {
+            "post": {
+                "description": "修改角色信息",
+                "security": [],
+                "tags": [
+                    "角色管理"
+                ],
+                "summary": "修改角色信息",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "description": "角色ID"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "角色名称"
+                    },
+                    {
+                        "name": "code",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "角色编码"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer",
+                        "description": "角色状态 取值范围及含义: 1 - 启用; 0 - 停用;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    },
+                    {
+                        "name": "sort",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "排序"
+                    },
+                    {
+                        "name": "dataScope",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "数据权限 取值范围及含义: 0 - 所有数据; 1 - 部门及子部门数据; 2 - 本部门数据; 3 - 本人数据;",
+                        "enum": [
+                            0,
+                            1,
+                            2,
+                            3
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/roles/delete/": {
+            "post": {
+                "description": "删除角色",
+                "security": [],
+                "tags": [
+                    "角色管理"
+                ],
+                "summary": "删除角色",
+                "parameters": [
+                    {
+                        "name": "ids",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "删除角色，多个以英文逗号(,)分割"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/roles/menuids/": {
+            "get": {
+                "description": "获取角色的菜单ID集合",
+                "security": [],
+                "tags": [
+                    "角色管理"
+                ],
+                "summary": "获取角色的菜单ID集合",
+                "parameters": [
+                    {
+                        "name": "roleId",
+                        "in": "query",
+                        "required": true,
+                        "type": "number",
+                        "description": "角色ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取角色的菜单ID集合",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1RolesMenuIdsRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "items": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/roles/menus/": {
+            "post": {
+                "description": "分配菜单权限给角色",
+                "security": [],
+                "tags": [
+                    "角色管理"
+                ],
+                "summary": "分配菜单权限给角色",
+                "parameters": [
+                    {
+                        "name": "roleId",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "description": "角色ID"
+                    },
+                    {
+                        "name": "menuIds",
+                        "in": "formData",
+                        "required": false,
+                        "type": "number",
+                        "description": "菜单ID集合"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/roles/status/": {
+            "post": {
+                "description": "修改角色状态",
+                "security": [],
+                "tags": [
+                    "角色管理"
+                ],
+                "summary": "修改角色状态",
+                "parameters": [
+                    {
+                        "name": "roleId",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "description": "角色ID"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer",
+                        "description": "角色状态 取值范围及含义: 1 - 启用; 0 - 停用;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/menus/list/": {
+            "get": {
+                "description": "菜单列表",
+                "security": [],
+                "tags": [
+                    "菜单管理"
+                ],
+                "summary": "菜单列表",
+                "parameters": [
+                    {
+                        "name": "keywords",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "关键字"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "状态 取值范围及含义: 1 - 显示; 0 - 隐藏;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "菜单类型, 忽略本参数 取值范围及含义: 1 - MENU; 2 - CATALOG; 3 - EXTLINK; 4 - BUTTON;",
+                        "enum": [
+                            1,
+                            2,
+                            3,
+                            4
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "菜单列表响应",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1MenusListRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/menus/delete/": {
+            "post": {
+                "description": "删除菜单",
+                "security": [],
+                "tags": [
+                    "菜单管理"
+                ],
+                "summary": "删除菜单",
+                "parameters": [
+                    {
+                        "name": "ids",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "菜单ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/menus/add/": {
+            "post": {
+                "description": "新增菜单",
+                "security": [],
+                "tags": [
+                    "菜单管理"
+                ],
+                "summary": "新增菜单",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "number",
+                        "description": "菜单ID"
+                    },
+                    {
+                        "name": "parentId",
+                        "in": "formData",
+                        "required": false,
+                        "type": "number",
+                        "description": "父菜单ID"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "菜单名称"
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "菜单类型 取值范围及含义: NULL - 无类型; CATALOG - 目录; MENU - 菜单; BUTTON - 按钮; EXTLINK - 外链;",
+                        "enum": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ]
+                    },
+                    {
+                        "name": "path",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "路由路径"
+                    },
+                    {
+                        "name": "component",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "组件路径(vue页面完整路径，省略.vue后缀)"
+                    },
+                    {
+                        "name": "perm",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "权限标识"
+                    },
+                    {
+                        "name": "visible",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "显示状态 取值范围及含义: 1 - 显示; 0 - 隐藏;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    },
+                    {
+                        "name": "sort",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "排序(数字越小排名越靠前)"
+                    },
+                    {
+                        "name": "icon",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "菜单图标"
+                    },
+                    {
+                        "name": "redirect",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "跳转路径"
+                    },
+                    {
+                        "name": "keepAlive",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "是否开启缓存"
+                    },
+                    {
+                        "name": "alwaysShow",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "是否总是显示"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/menus/options/": {
+            "get": {
+                "description": "菜单下拉列表",
+                "security": [],
+                "tags": [
+                    "菜单管理"
+                ],
+                "summary": "菜单下拉列表",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "菜单选项列表响应",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1MenusOptionsRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/menus/routes/": {
+            "get": {
+                "description": "路由列表",
+                "security": [],
+                "tags": [
+                    "菜单管理"
+                ],
+                "summary": "路由列表",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "json response",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.MenuRouteRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/menus/form/": {
+            "get": {
+                "description": "菜单表单",
+                "security": [],
+                "tags": [
+                    "菜单管理"
+                ],
+                "summary": "菜单表单",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "type": "number",
+                        "description": "菜单ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "菜单表单数据",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1MenusFormRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "id": 0,
+                                    "parentId": 0,
+                                    "name": "",
+                                    "type": "",
+                                    "path": "",
+                                    "component": "",
+                                    "perm": "",
+                                    "visible": 0,
+                                    "sort": 0,
+                                    "icon": "",
+                                    "redirect": "",
+                                    "alwaysShow": 0,
+                                    "keepAlive": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/menus/update/": {
+            "post": {
+                "description": "修改菜单",
+                "security": [],
+                "tags": [
+                    "菜单管理"
+                ],
+                "summary": "修改菜单",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "description": "菜单ID"
+                    },
+                    {
+                        "name": "parentId",
+                        "in": "formData",
+                        "required": false,
+                        "type": "number",
+                        "description": "父菜单ID"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "菜单名称"
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "菜单类型 取值范围及含义: NULL - 无类型; CATALOG - 目录; MENU - 菜单; BUTTON - 按钮; EXTLINK - 外链;",
+                        "enum": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ]
+                    },
+                    {
+                        "name": "path",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "路由路径"
+                    },
+                    {
+                        "name": "component",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "组件路径(vue页面完整路径，省略.vue后缀)"
+                    },
+                    {
+                        "name": "perm",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "权限标识"
+                    },
+                    {
+                        "name": "visible",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "显示状态 取值范围及含义: 1 - 显示; 0 - 隐藏;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    },
+                    {
+                        "name": "sort",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "排序(数字越小排名越靠前)"
+                    },
+                    {
+                        "name": "icon",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "菜单图标"
+                    },
+                    {
+                        "name": "redirect",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "跳转路径"
+                    },
+                    {
+                        "name": "alwaysShow",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "是否总是显示"
+                    },
+                    {
+                        "name": "keepAlive",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "是否开启缓存"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/menus/status/": {
+            "post": {
+                "description": "修改菜单状态",
+                "security": [],
+                "tags": [
+                    "菜单管理"
+                ],
+                "summary": "修改菜单状态",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "description": "菜单ID"
+                    },
+                    {
+                        "name": "visible",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer",
+                        "description": "菜单状态 取值范围及含义: 1 - 显示; 0 - 隐藏;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dept/list/": {
+            "get": {
+                "description": "获取部门列表",
+                "security": [],
+                "tags": [
+                    "部门管理"
+                ],
+                "summary": "获取部门列表",
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "搜索关键词"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "部门列表响应",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1DeptListRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dept/add/": {
+            "post": {
+                "description": "添加部门",
+                "security": [],
+                "tags": [
+                    "部门管理"
+                ],
+                "summary": "添加部门",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "number",
+                        "description": "部门id, 前端使用"
+                    },
+                    {
+                        "name": "parentId",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "description": "父部门id"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "部门名称"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "排序"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dept/options/": {
+            "get": {
+                "description": "获取部门下拉列表",
+                "security": [],
+                "tags": [
+                    "部门管理"
+                ],
+                "summary": "获取部门下拉列表",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "部门下拉列表响应",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1DeptOptionsRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dept/update/": {
+            "post": {
+                "description": "修改部门",
+                "security": [],
+                "tags": [
+                    "部门管理"
+                ],
+                "summary": "修改部门",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "description": "部门id"
+                    },
+                    {
+                        "name": "parentId",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "description": "父部门id"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "部门名称"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "排序"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dept/form/": {
+            "get": {
+                "description": "获取部门表单数据",
+                "security": [],
+                "tags": [
+                    "部门管理"
+                ],
+                "summary": "获取部门表单数据",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "type": "number",
+                        "description": "部门id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "获取部门表单数据返回参数",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1DeptFormRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "id": 0,
+                                    "parentId": 0,
+                                    "name": "",
+                                    "sort": 0,
+                                    "status": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dept/delete/": {
+            "post": {
+                "description": "删除部门",
+                "security": [],
+                "tags": [
+                    "部门管理"
+                ],
+                "summary": "删除部门",
+                "parameters": [
+                    {
+                        "name": "ids",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "部门ID，多个以英文逗号(,)分割"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dict/page/": {
+            "get": {
+                "description": "字典分页列表",
+                "security": [],
+                "tags": [
+                    "字典管理"
+                ],
+                "summary": "字典分页列表",
+                "parameters": [
+                    {
+                        "name": "keywords",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "关键字(类型名称/类型编码)"
+                    },
+                    {
+                        "name": "typeCode",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "字典类型编码"
+                    },
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "页码"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "每页记录数"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "json response",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1DictPageRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "list": {},
+                                    "total": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dict/options/": {
+            "get": {
+                "description": "字典下拉列表",
+                "security": [],
+                "tags": [
+                    "字典管理"
+                ],
+                "summary": "字典下拉列表",
+                "parameters": [
+                    {
+                        "name": "typeCode",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "description": "字典类型编码"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "json response",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1DictOptionsRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "items": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dict/form/": {
+            "get": {
+                "description": "字典数据表单数据",
+                "security": [],
+                "tags": [
+                    "字典管理"
+                ],
+                "summary": "字典数据表单数据",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "type": "number",
+                        "description": "字典ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "json response",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1DictFormRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "id": 0,
+                                    "typeCode": "",
+                                    "name": "",
+                                    "value": "",
+                                    "status": 0,
+                                    "sort": 0,
+                                    "remark": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dict/add/": {
+            "post": {
+                "description": "新增字典",
+                "security": [],
+                "tags": [
+                    "字典管理"
+                ],
+                "summary": "新增字典",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "number",
+                        "description": "主键"
+                    },
+                    {
+                        "name": "typeCode",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "类型编码"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "字典名称"
+                    },
+                    {
+                        "name": "value",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "字典值"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    },
+                    {
+                        "name": "sort",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "排序"
+                    },
+                    {
+                        "name": "remark",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "备注"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dict/update/": {
+            "post": {
+                "description": "修改字典",
+                "security": [],
+                "tags": [
+                    "字典管理"
+                ],
+                "summary": "修改字典",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "description": "主键"
+                    },
+                    {
+                        "name": "typeCode",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "类型编码"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "字典名称"
+                    },
+                    {
+                        "name": "value",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "字典值"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    },
+                    {
+                        "name": "sort",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "排序"
+                    },
+                    {
+                        "name": "remark",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "备注"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dict/delete/": {
+            "post": {
+                "description": "删除字典",
+                "security": [],
+                "tags": [
+                    "字典管理"
+                ],
+                "summary": "删除字典",
+                "parameters": [
+                    {
+                        "name": "ids",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "字典ID，多个以英文逗号(,)拼接"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dict_types/page/": {
+            "get": {
+                "description": "字典类型分页列表",
+                "security": [],
+                "tags": [
+                    "字典类型"
+                ],
+                "summary": "字典类型分页列表",
+                "parameters": [
+                    {
+                        "name": "keywords",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "关键字(类型名称/类型编码)"
+                    },
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "页码"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "每页记录数"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "json response",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1DictTypesPageRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "list": {},
+                                    "total": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dict_types/form/": {
+            "get": {
+                "description": "字典类型表单",
+                "security": [],
+                "tags": [
+                    "字典类型"
+                ],
+                "summary": "字典类型表单",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "type": "number",
+                        "description": "主键"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "json response",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1DictTypesFormRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "id": 0,
+                                    "name": "",
+                                    "code": "",
+                                    "status": 0,
+                                    "remark": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dict_types/add/": {
+            "post": {
+                "description": "新增字典类型",
+                "security": [],
+                "tags": [
+                    "字典类型"
+                ],
+                "summary": "新增字典类型",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "number",
+                        "description": "主键"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "类型名称"
+                    },
+                    {
+                        "name": "code",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "类型编码-必填"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    },
+                    {
+                        "name": "remark",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "备注"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dict_types/update/": {
+            "post": {
+                "description": "修改字典类型",
+                "security": [],
+                "tags": [
+                    "字典类型"
+                ],
+                "summary": "修改字典类型",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "description": "主键"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "类型名称"
+                    },
+                    {
+                        "name": "code",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "类型编码"
+                    },
+                    {
+                        "name": "status",
+                        "in": "formData",
+                        "required": false,
+                        "type": "integer",
+                        "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;",
+                        "enum": [
+                            1,
+                            0
+                        ]
+                    },
+                    {
+                        "name": "remark",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "备注"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/dict_types/delete/": {
+            "post": {
+                "description": "删除字典类型",
+                "security": [],
+                "tags": [
+                    "字典类型"
+                ],
+                "summary": "删除字典类型",
+                "parameters": [
+                    {
+                        "name": "ids",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "字典类型ID，多个以英文逗号(,)分割"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/files/upload/": {
+            "post": {
+                "description": "文件上传请求",
+                "security": [],
+                "tags": [
+                    "文件管理"
+                ],
+                "summary": "文件上传请求",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "文件上传请求",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1FilesUploadRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "name": "",
+                                    "url": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/files/delete/": {
+            "post": {
+                "description": "文件删除请求",
+                "security": [],
+                "tags": [
+                    "文件管理"
+                ],
+                "summary": "文件删除请求",
+                "parameters": [
+                    {
+                        "name": "filePath",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "文件路径"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/files/fetch/": {
+            "get": {
+                "description": "文件下载请求",
+                "security": [],
+                "tags": [
+                    "文件管理"
+                ],
+                "summary": "文件下载请求",
+                "parameters": [
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "description": "文件URL"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/files/page/": {
+            "get": {
+                "description": "文件分页请求",
+                "security": [],
+                "tags": [
+                    "文件管理"
+                ],
+                "summary": "文件分页请求",
+                "parameters": [
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "required": true,
+                        "type": "integer",
+                        "description": "页码"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": true,
+                        "type": "integer",
+                        "description": "每页数量"
+                    },
+                    {
+                        "name": "vendor",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "文件存储提供商"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "文件名"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "json response",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1FilePageRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "items": {},
+                                    "total": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/files/form/": {
+            "get": {
+                "description": "文件修改弹窗请求",
+                "security": [],
+                "tags": [
+                    "文件管理"
+                ],
+                "summary": "文件修改弹窗请求",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "type": "number",
+                        "description": "文件 ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "文件弹窗信息返回",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1FileFromRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "id": 0,
+                                    "name": "",
+                                    "url": "",
+                                    "key": "",
+                                    "vendor": "",
+                                    "createTime": "",
+                                    "deleted": false,
+                                    "vendorName": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/files/update/": {
+            "post": {
+                "description": "文件修改请求",
+                "security": [],
+                "tags": [
+                    "文件管理"
+                ],
+                "summary": "文件修改请求",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "description": "文件ID"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "文件名"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/vendor/zones/": {
+            "get": {
+                "description": "获取文件存储区域",
+                "security": [],
+                "tags": [
+                    "存储提供商"
+                ],
+                "summary": "获取文件存储区域",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "获取文件存储区域返回",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1FilesZoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "qiniu": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/vendor/init/": {
+            "get": {
+                "description": "初始化文件提供商参数",
+                "security": [],
+                "tags": [
+                    "存储提供商"
+                ],
+                "summary": "初始化文件提供商参数",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/vendor/list/": {
+            "get": {
+                "description": "获取文件存储提供商列表",
+                "security": [],
+                "tags": [
+                    "存储提供商"
+                ],
+                "summary": "获取文件存储提供商列表",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "获取文件存储提供商列表返回",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1FilesVendorsRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "items": {},
+                                    "current": {
+                                        "id": 0,
+                                        "vendor": "",
+                                        "name": "",
+                                        "key": "",
+                                        "value": "",
+                                        "remark": "",
+                                        "updateTime": ""
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/vendor/page/": {
+            "get": {
+                "description": "文件配置列表",
+                "security": [],
+                "tags": [
+                    "存储提供商"
+                ],
+                "summary": "文件配置列表",
+                "parameters": [
+                    {
+                        "name": "vendor",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "description": "文件存储提供商"
+                    },
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "页码"
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "description": "每页记录数"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "json response",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1VendorPageRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "items": {},
+                                    "total": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/vendor/form/": {
+            "get": {
+                "description": "获取配置项详情值",
+                "security": [],
+                "tags": [
+                    "存储提供商"
+                ],
+                "summary": "获取配置项详情值",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "type": "number",
+                        "description": "配置 id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "json response",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.V1VendorFormRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {
+                                    "item": {
+                                        "id": 0,
+                                        "vendor": "",
+                                        "name": "",
+                                        "key": "",
+                                        "value": "",
+                                        "remark": "",
+                                        "updateTime": ""
+                                    },
+                                    "options": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        },
+        "/v1/vendor/update/": {
+            "post": {
+                "description": "更新配置项",
+                "security": [],
+                "tags": [
+                    "存储提供商"
+                ],
+                "summary": "更新配置项",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "description": "主键"
+                    },
+                    {
+                        "name": "vendor",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "文件存储提供商"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "配置名"
+                    },
+                    {
+                        "name": "key",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "配置键"
+                    },
+                    {
+                        "name": "value",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "配置值"
+                    },
+                    {
+                        "name": "remark",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "备注"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回数据为空",
+                        "schema": {
+                            "$ref": "#/definitions/AdminCore.NoneRsp"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "result": 0,
+                                "data": {}
+                            }
+                        }
+                    }
+                },
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "AdminCore.AuthLoginReq": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "description": "用户名"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "密码"
+                },
+                "captchaKey": {
+                    "type": "string",
+                    "description": "验证码key"
+                },
+                "captchaCode": {
+                    "type": "string",
+                    "description": "验证码"
+                }
+            },
+            "required": [
+                "username",
+                "password",
+                "captchaKey",
+                "captchaCode"
+            ]
+        },
+        "AdminCore.AauthLoginRsp": {
+            "type": "object",
+            "properties": {
+                "accessToken": {
+                    "type": "string",
+                    "description": "访问token"
+                },
+                "tokenType": {
+                    "type": "string",
+                    "description": "token 类型, 固定为 Bearer"
+                },
+                "refreshToken": {
+                    "type": "string",
+                    "description": "刷新token"
+                },
+                "expiresIn": {
+                    "type": "number",
+                    "description": "token 过期时间, 单位毫秒"
+                }
+            },
+            "required": [
+                "accessToken",
+                "tokenType",
+                "refreshToken",
+                "expiresIn"
+            ]
+        },
+        "AdminCore.NoneReq": {
+            "type": "object",
+            "properties": {},
+            "required": []
+        },
+        "AdminCore.NoneRsp": {
+            "type": "object",
+            "properties": {},
+            "required": []
+        },
+        "AdminCore.AuthCaptchaRsp": {
+            "type": "object",
+            "properties": {
+                "captchaKey": {
+                    "type": "string",
+                    "description": "验证码key"
+                },
+                "captchaBase64": {
+                    "type": "string",
+                    "description": "验证码, base64字符串。[data:image/png;base64,] 开头"
+                },
+                "width": {
+                    "type": "integer",
+                    "description": "图片宽度"
+                },
+                "height": {
+                    "type": "integer",
+                    "description": "图片高度"
+                }
+            },
+            "required": [
+                "captchaKey",
+                "captchaBase64",
+                "width",
+                "height"
+            ]
+        },
+        "AdminCore.V1UsersMeRsp": {
+            "type": "object",
+            "properties": {
+                "userId": {
+                    "type": "number",
+                    "description": "用户ID"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "用户名"
+                },
+                "nickname": {
+                    "type": "string",
+                    "description": "用户昵称"
+                },
+                "avatar": {
+                    "type": "string",
+                    "description": "头像地址"
+                },
+                "roles": {
+                    "type": "array",
+                    "description": "用户角色编码集合",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "perms": {
+                    "type": "array",
+                    "description": "用户权限标识集合",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "userId",
+                "username",
+                "nickname",
+                "avatar",
+                "roles",
+                "perms"
+            ]
+        },
+        "AdminCore.V1UsersPageReq": {
+            "type": "object",
+            "properties": {
+                "keywords": {
+                    "type": "string",
+                    "description": "关键字"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "用户状态"
+                },
+                "deptId": {
+                    "type": "number",
+                    "description": "部门ID"
+                },
+                "pageNum": {
+                    "type": "integer",
+                    "description": "页码"
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "description": "每页条数"
+                },
+                "startTime": {
+                    "type": "string",
+                    "description": "开始时间-年月日"
+                },
+                "endTime": {
+                    "type": "string",
+                    "description": "结束时间-年月日"
+                }
+            },
+            "required": [
+                "keywords",
+                "status",
+                "deptId",
+                "pageNum",
+                "pageSize",
+                "startTime",
+                "endTime"
+            ]
+        },
+        "AdminCore.V1UsersPageRsp": {
+            "type": "object",
+            "properties": {
+                "total": {
+                    "type": "number",
+                    "description": "总数"
+                },
+                "list": {
+                    "type": "array",
+                    "description": "用户列表",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.V1UserPageItem"
+                    }
+                }
+            },
+            "required": [
+                "total",
+                "list"
+            ]
+        },
+        "AdminCore.V1UserPageItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "用户ID"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "用户名"
+                },
+                "nickname": {
+                    "type": "string",
+                    "description": "用户昵称"
+                },
+                "mobile": {
+                    "type": "string",
+                    "description": "手机号"
+                },
+                "genderLabel": {
+                    "type": "string",
+                    "description": "性别"
+                },
+                "avatar": {
+                    "type": "string",
+                    "description": "头像地址"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "用户邮箱"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "用户状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                },
+                "deptName": {
+                    "type": "string",
+                    "description": "部门名称"
+                },
+                "roleNames": {
+                    "type": "string",
+                    "description": "角色名称"
+                },
+                "createTime": {
+                    "type": "string",
+                    "description": "创建时间"
+                }
+            },
+            "required": [
+                "id",
+                "username",
+                "nickname",
+                "mobile",
+                "genderLabel",
+                "avatar",
+                "email",
+                "status",
+                "deptName",
+                "roleNames",
+                "createTime"
+            ]
+        },
+        "AdminCore.V1UsersAddReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "用户ID"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "用户名"
+                },
+                "nickname": {
+                    "type": "string",
+                    "description": "用户昵称"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "密码"
+                },
+                "mobile": {
+                    "type": "string",
+                    "description": "手机号"
+                },
+                "gender": {
+                    "type": "integer",
+                    "description": "性别 取值范围及含义: 0 - 未知; 1 - 男; 2 - 女;"
+                },
+                "avatar": {
+                    "type": "string",
+                    "description": "头像地址"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "用户邮箱"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "用户状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                },
+                "deptId": {
+                    "type": "number",
+                    "description": "部门ID"
+                },
+                "roleIds": {
+                    "type": "array",
+                    "description": "角色ID集合",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "username",
+                "nickname",
+                "password",
+                "mobile",
+                "gender",
+                "avatar",
+                "email",
+                "status",
+                "deptId",
+                "roleIds"
+            ]
+        },
+        "AdminCore.V1UserFormReq": {
+            "type": "object",
+            "properties": {
+                "userId": {
+                    "type": "number",
+                    "description": "用户ID"
+                }
+            },
+            "required": [
+                "userId"
+            ]
+        },
+        "AdminCore.V1UserFormRsp": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "用户ID"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "用户名"
+                },
+                "nickname": {
+                    "type": "string",
+                    "description": "用户昵称"
+                },
+                "mobile": {
+                    "type": "string",
+                    "description": "手机号"
+                },
+                "gender": {
+                    "type": "integer",
+                    "description": "性别 取值范围及含义: 0 - 未知; 1 - 男; 2 - 女;"
+                },
+                "avatar": {
+                    "type": "string",
+                    "description": "头像地址"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "用户邮箱"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "用户状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                },
+                "deptId": {
+                    "type": "number",
+                    "description": "部门ID"
+                },
+                "roleIds": {
+                    "type": "array",
+                    "description": "角色ID集合",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "username",
+                "nickname",
+                "mobile",
+                "gender",
+                "avatar",
+                "email",
+                "status",
+                "deptId",
+                "roleIds"
+            ]
+        },
+        "AdminCore.V1UserUpdateReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "用户ID"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "用户名"
+                },
+                "nickname": {
+                    "type": "string",
+                    "description": "用户昵称"
+                },
+                "mobile": {
+                    "type": "string",
+                    "description": "手机号"
+                },
+                "gender": {
+                    "type": "integer",
+                    "description": "用户状态 取值范围及含义: 0 - 未知; 1 - 男; 2 - 女;"
+                },
+                "avatar": {
+                    "type": "string",
+                    "description": "头像地址"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "用户邮箱"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "用户状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                },
+                "deptId": {
+                    "type": "number",
+                    "description": "部门ID"
+                },
+                "roleIds": {
+                    "type": "array",
+                    "description": "角色ID集合",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "username",
+                "nickname",
+                "mobile",
+                "gender",
+                "avatar",
+                "email",
+                "status",
+                "deptId",
+                "roleIds"
+            ]
+        },
+        "AdminCore.V1UsersDeleteReq": {
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "type": "string",
+                    "description": "用户ID，多个以英文逗号(,)分割"
+                }
+            },
+            "required": [
+                "ids"
+            ]
+        },
+        "AdminCore.V1UsersPasswordReq": {
+            "type": "object",
+            "properties": {
+                "userId": {
+                    "type": "number",
+                    "description": "用户id"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "新密码"
+                }
+            },
+            "required": [
+                "userId",
+                "password"
+            ]
+        },
+        "AdminCore.V1UsersStatusReq": {
+            "type": "object",
+            "properties": {
+                "userId": {
+                    "type": "number",
+                    "description": "用户ID"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "用户状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                }
+            },
+            "required": [
+                "userId",
+                "status"
+            ]
+        },
+        "AdminCore.V1RolesPageReq": {
+            "type": "object",
+            "properties": {
+                "keywords": {
+                    "type": "string",
+                    "description": "搜索关键字"
+                },
+                "pageNum": {
+                    "type": "integer",
+                    "description": "页码"
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "description": "每页数量"
+                }
+            },
+            "required": [
+                "keywords",
+                "pageNum",
+                "pageSize"
+            ]
+        },
+        "AdminCore.V1RolesPageRsp": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "type": "array",
+                    "description": "数据项",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.V1RolesItem"
+                    }
+                },
+                "total": {
+                    "type": "number",
+                    "description": "总数"
+                }
+            },
+            "required": [
+                "list",
+                "total"
+            ]
+        },
+        "AdminCore.V1RolesItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "角色ID"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "角色名称"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "角色编码"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "角色状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                },
+                "sort": {
+                    "type": "integer",
+                    "description": "排序"
+                },
+                "createTime": {
+                    "type": "string",
+                    "description": "创建时间"
+                },
+                "updateTime": {
+                    "type": "string",
+                    "description": "更新时间"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "code",
+                "status",
+                "sort",
+                "createTime",
+                "updateTime"
+            ]
+        },
+        "AdminCore.V1RolesOptiosRsp": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "description": "角色下拉列表项",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.LongOptionItem"
+                    }
+                }
+            },
+            "required": [
+                "items"
+            ]
+        },
+        "AdminCore.LongOptionItem": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "number",
+                    "description": "选项ID"
+                },
+                "label": {
+                    "type": "string",
+                    "description": "选项名称"
+                }
+            },
+            "required": [
+                "value",
+                "label"
+            ]
+        },
+        "AdminCore.V1RolesAddReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "角色ID"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "角色名称"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "角色编码"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "角色状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                },
+                "sort": {
+                    "type": "integer",
+                    "description": "排序"
+                },
+                "dataScope": {
+                    "type": "integer",
+                    "description": "数据权限 取值范围及含义: 0 - 所有数据; 1 - 部门及子部门数据; 2 - 本部门数据; 3 - 本人数据;"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "code",
+                "status",
+                "sort",
+                "dataScope"
+            ]
+        },
+        "AdminCore.V1RolesFormReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "角色ID"
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "AdminCore.V1RolesFormRsp": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "角色ID"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "角色名称"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "角色编码"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "角色状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                },
+                "sort": {
+                    "type": "integer",
+                    "description": "排序"
+                },
+                "dataScope": {
+                    "type": "integer",
+                    "description": "数据权限 取值范围及含义: 0 - 所有数据; 1 - 部门及子部门数据; 2 - 本部门数据; 3 - 本人数据;"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "code",
+                "status",
+                "sort",
+                "dataScope"
+            ]
+        },
+        "AdminCore.V1RolesUpdateReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "角色ID"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "角色名称"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "角色编码"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "角色状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                },
+                "sort": {
+                    "type": "integer",
+                    "description": "排序"
+                },
+                "dataScope": {
+                    "type": "integer",
+                    "description": "数据权限 取值范围及含义: 0 - 所有数据; 1 - 部门及子部门数据; 2 - 本部门数据; 3 - 本人数据;"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "code",
+                "status",
+                "sort",
+                "dataScope"
+            ]
+        },
+        "AdminCore.V1RolesDeleteReq": {
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "type": "string",
+                    "description": "删除角色，多个以英文逗号(,)分割"
+                }
+            },
+            "required": [
+                "ids"
+            ]
+        },
+        "AdminCore.V1RolesMenuIdsReq": {
+            "type": "object",
+            "properties": {
+                "roleId": {
+                    "type": "number",
+                    "description": "角色ID"
+                }
+            },
+            "required": [
+                "roleId"
+            ]
+        },
+        "AdminCore.V1RolesMenuIdsRsp": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "description": "菜单ID集合",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            },
+            "required": [
+                "items"
+            ]
+        },
+        "AdminCore.V1RolesMenusReq": {
+            "type": "object",
+            "properties": {
+                "roleId": {
+                    "type": "number",
+                    "description": "角色ID"
+                },
+                "menuIds": {
+                    "type": "array",
+                    "description": "菜单ID集合",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            },
+            "required": [
+                "roleId",
+                "menuIds"
+            ]
+        },
+        "AdminCore.V1RolesStatusReq": {
+            "type": "object",
+            "properties": {
+                "roleId": {
+                    "type": "number",
+                    "description": "角色ID"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "角色状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                }
+            },
+            "required": [
+                "roleId",
+                "status"
+            ]
+        },
+        "AdminCore.V1MenusListReq": {
+            "type": "object",
+            "properties": {
+                "keywords": {
+                    "type": "string",
+                    "description": "关键字"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "状态 取值范围及含义: 1 - 显示; 0 - 隐藏;"
+                },
+                "type": {
+                    "type": "integer",
+                    "description": "菜单类型, 忽略本参数 取值范围及含义: 1 - MENU; 2 - CATALOG; 3 - EXTLINK; 4 - BUTTON;"
+                }
+            },
+            "required": [
+                "keywords",
+                "status",
+                "type"
+            ]
+        },
+        "AdminCore.V1MenusListRsp": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "description": "菜单列表",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.MenuItem"
+                    }
+                }
+            },
+            "required": [
+                "items"
+            ]
+        },
+        "AdminCore.MenuItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "菜单ID"
+                },
+                "parentId": {
+                    "type": "number",
+                    "description": "父菜单ID"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "菜单名称"
+                },
+                "icon": {
+                    "type": "string",
+                    "description": "ICON"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "路由相对路径"
+                },
+                "routeName": {
+                    "type": "string",
+                    "description": "路由名称"
+                },
+                "component": {
+                    "type": "string",
+                    "description": "组件路径"
+                },
+                "sort": {
+                    "type": "integer",
+                    "description": "菜单排序(数字越小排名越靠前)"
+                },
+                "visible": {
+                    "type": "integer",
+                    "description": "是否可见 取值范围及含义: 1 - 显示; 0 - 隐藏;"
+                },
+                "redirect": {
+                    "type": "string",
+                    "description": "跳转路径"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "菜单类型 取值范围及含义: NULL - 无类型; CATALOG - 目录; MENU - 菜单; BUTTON - 按钮; EXTLINK - 外链;"
+                },
+                "perm": {
+                    "type": "string",
+                    "description": "按钮权限标识"
+                },
+                "children": {
+                    "type": "array",
+                    "description": "子菜单",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.MenuItem"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "parentId",
+                "name",
+                "icon",
+                "path",
+                "routeName",
+                "component",
+                "sort",
+                "visible",
+                "redirect",
+                "type",
+                "perm",
+                "children"
+            ]
+        },
+        "AdminCore.V1MenusDeleteReq": {
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "type": "string",
+                    "description": "菜单ID"
+                }
+            },
+            "required": [
+                "ids"
+            ]
+        },
+        "AdminCore.V1MenusAddReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "菜单ID"
+                },
+                "parentId": {
+                    "type": "number",
+                    "description": "父菜单ID"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "菜单名称"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "菜单类型 取值范围及含义: NULL - 无类型; CATALOG - 目录; MENU - 菜单; BUTTON - 按钮; EXTLINK - 外链;"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "路由路径"
+                },
+                "component": {
+                    "type": "string",
+                    "description": "组件路径(vue页面完整路径，省略.vue后缀)"
+                },
+                "perm": {
+                    "type": "string",
+                    "description": "权限标识"
+                },
+                "visible": {
+                    "type": "integer",
+                    "description": "显示状态 取值范围及含义: 1 - 显示; 0 - 隐藏;"
+                },
+                "sort": {
+                    "type": "integer",
+                    "description": "排序(数字越小排名越靠前)"
+                },
+                "icon": {
+                    "type": "string",
+                    "description": "菜单图标"
+                },
+                "redirect": {
+                    "type": "string",
+                    "description": "跳转路径"
+                },
+                "keepAlive": {
+                    "type": "integer",
+                    "description": "是否开启缓存"
+                },
+                "alwaysShow": {
+                    "type": "integer",
+                    "description": "是否总是显示"
+                }
+            },
+            "required": [
+                "id",
+                "parentId",
+                "name",
+                "type",
+                "path",
+                "component",
+                "perm",
+                "visible",
+                "sort",
+                "icon",
+                "redirect",
+                "keepAlive",
+                "alwaysShow"
+            ]
+        },
+        "AdminCore.V1MenusOptionsRsp": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "description": "菜单选项列表",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.MenuOptions"
+                    }
+                }
+            },
+            "required": [
+                "items"
+            ]
+        },
+        "AdminCore.MenuOptions": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "number",
+                    "description": "菜单ID"
+                },
+                "label": {
+                    "type": "string",
+                    "description": "菜单名称"
+                },
+                "children": {
+                    "type": "array",
+                    "description": "子菜单",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.MenuOptions"
+                    }
+                }
+            },
+            "required": [
+                "value",
+                "label",
+                "children"
+            ]
+        },
+        "AdminCore.MenuRouteRsp": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "description": "路由列表",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.MenuRouteItem"
+                    }
+                }
+            },
+            "required": [
+                "items"
+            ]
+        },
+        "AdminCore.MenuRouteItem": {
+            "type": "object",
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "description": "路由路径"
+                },
+                "component": {
+                    "type": "string",
+                    "description": "组件路径"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "路由名称"
+                },
+                "redirect": {
+                    "type": "string",
+                    "description": "跳转链接"
+                },
+                "meta": {
+                    "type": "object",
+                    "description": "路由元信息",
+                    "$ref": "#/definitions/AdminCore.MenuRouteMeta"
+                },
+                "children": {
+                    "type": "array",
+                    "description": "子路由",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.MenuRouteItem"
+                    }
+                }
+            },
+            "required": [
+                "path",
+                "component",
+                "name",
+                "redirect",
+                "meta",
+                "children"
+            ]
+        },
+        "AdminCore.MenuRouteMeta": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "路由title"
+                },
+                "icon": {
+                    "type": "string",
+                    "description": "路由icon"
+                },
+                "hiddle": {
+                    "type": "boolean",
+                    "description": "是否隐藏"
+                },
+                "roles": {
+                    "type": "array",
+                    "description": "拥有路由权限的角色编码",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "keepAlive": {
+                    "type": "boolean",
+                    "description": "是否开启缓存"
+                }
+            },
+            "required": [
+                "title",
+                "icon",
+                "hiddle",
+                "roles",
+                "keepAlive"
+            ]
+        },
+        "AdminCore.V1MenusFormReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "菜单ID"
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "AdminCore.V1MenusFormRsp": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "菜单ID"
+                },
+                "parentId": {
+                    "type": "number",
+                    "description": "父菜单ID"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "菜单名称"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "菜单类型 取值范围及含义: NULL - 无类型; CATALOG - 目录; MENU - 菜单; BUTTON - 按钮; EXTLINK - 外链;"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "路由路径"
+                },
+                "component": {
+                    "type": "string",
+                    "description": "组件路径(vue页面完整路径，省略.vue后缀)"
+                },
+                "perm": {
+                    "type": "string",
+                    "description": "权限标识"
+                },
+                "visible": {
+                    "type": "integer",
+                    "description": "显示状态 取值范围及含义: 1 - 显示; 0 - 隐藏;"
+                },
+                "sort": {
+                    "type": "integer",
+                    "description": "排序(数字越小排名越靠前)"
+                },
+                "icon": {
+                    "type": "string",
+                    "description": "菜单图标"
+                },
+                "redirect": {
+                    "type": "string",
+                    "description": "跳转路径"
+                },
+                "alwaysShow": {
+                    "type": "integer",
+                    "description": "是否总是显示"
+                },
+                "keepAlive": {
+                    "type": "integer",
+                    "description": "是否开启缓存"
+                }
+            },
+            "required": [
+                "id",
+                "parentId",
+                "name",
+                "type",
+                "path",
+                "component",
+                "perm",
+                "visible",
+                "sort",
+                "icon",
+                "redirect",
+                "alwaysShow",
+                "keepAlive"
+            ]
+        },
+        "AdminCore.V1MenusUpdateReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "菜单ID"
+                },
+                "parentId": {
+                    "type": "number",
+                    "description": "父菜单ID"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "菜单名称"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "菜单类型 取值范围及含义: NULL - 无类型; CATALOG - 目录; MENU - 菜单; BUTTON - 按钮; EXTLINK - 外链;"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "路由路径"
+                },
+                "component": {
+                    "type": "string",
+                    "description": "组件路径(vue页面完整路径，省略.vue后缀)"
+                },
+                "perm": {
+                    "type": "string",
+                    "description": "权限标识"
+                },
+                "visible": {
+                    "type": "integer",
+                    "description": "显示状态 取值范围及含义: 1 - 显示; 0 - 隐藏;"
+                },
+                "sort": {
+                    "type": "integer",
+                    "description": "排序(数字越小排名越靠前)"
+                },
+                "icon": {
+                    "type": "string",
+                    "description": "菜单图标"
+                },
+                "redirect": {
+                    "type": "string",
+                    "description": "跳转路径"
+                },
+                "alwaysShow": {
+                    "type": "integer",
+                    "description": "是否总是显示"
+                },
+                "keepAlive": {
+                    "type": "integer",
+                    "description": "是否开启缓存"
+                }
+            },
+            "required": [
+                "id",
+                "parentId",
+                "name",
+                "type",
+                "path",
+                "component",
+                "perm",
+                "visible",
+                "sort",
+                "icon",
+                "redirect",
+                "alwaysShow",
+                "keepAlive"
+            ]
+        },
+        "AdminCore.V1MenusStatusReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "菜单ID"
+                },
+                "visible": {
+                    "type": "integer",
+                    "description": "菜单状态 取值范围及含义: 1 - 显示; 0 - 隐藏;"
+                }
+            },
+            "required": [
+                "id",
+                "visible"
+            ]
+        },
+        "AdminCore.V1DeptListReq": {
+            "type": "object",
+            "properties": {
+                "keyword": {
+                    "type": "string",
+                    "description": "搜索关键词"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                }
+            },
+            "required": [
+                "keyword",
+                "status"
+            ]
+        },
+        "AdminCore.V1DeptListRsp": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "description": "部门列表",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.V1DeptItem"
+                    }
+                }
+            },
+            "required": [
+                "items"
+            ]
+        },
+        "AdminCore.V1DeptItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "部门id"
+                },
+                "parentId": {
+                    "type": "number",
+                    "description": "父部门id"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "部门名称"
+                },
+                "sort": {
+                    "type": "integer",
+                    "description": "排序"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                },
+                "createTime": {
+                    "type": "string",
+                    "description": "创建时间"
+                },
+                "updateTime": {
+                    "type": "string",
+                    "description": "修改时间"
+                },
+                "children": {
+                    "type": "array",
+                    "description": "子部门",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.V1DeptItem"
+                    }
+                }
+            },
+            "required": [
+                "id",
+                "parentId",
+                "name",
+                "sort",
+                "status",
+                "createTime",
+                "updateTime",
+                "children"
+            ]
+        },
+        "AdminCore.V1DeptAddReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "部门id, 前端使用"
+                },
+                "parentId": {
+                    "type": "number",
+                    "description": "父部门id"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "部门名称"
+                },
+                "sort": {
+                    "type": "integer",
+                    "description": "排序"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                }
+            },
+            "required": [
+                "id",
+                "parentId",
+                "name",
+                "sort",
+                "status"
+            ]
+        },
+        "AdminCore.V1DeptOptionsRsp": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "description": "部门列表",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.LongOptions"
+                    }
+                }
+            },
+            "required": [
+                "items"
+            ]
+        },
+        "AdminCore.LongOptions": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "number",
+                    "description": "选项ID"
+                },
+                "label": {
+                    "type": "string",
+                    "description": "选项名称"
+                },
+                "children": {
+                    "type": "array",
+                    "description": "子选项",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.LongOptions"
+                    }
+                }
+            },
+            "required": [
+                "value",
+                "label",
+                "children"
+            ]
+        },
+        "AdminCore.V1DeptUpdateReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "部门id"
+                },
+                "parentId": {
+                    "type": "number",
+                    "description": "父部门id"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "部门名称"
+                },
+                "sort": {
+                    "type": "integer",
+                    "description": "排序"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                }
+            },
+            "required": [
+                "id",
+                "parentId",
+                "name",
+                "sort",
+                "status"
+            ]
+        },
+        "AdminCore.V1DeptFormReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "部门id"
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "AdminCore.V1DeptFormRsp": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "部门id"
+                },
+                "parentId": {
+                    "type": "number",
+                    "description": "父部门id"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "部门名称"
+                },
+                "sort": {
+                    "type": "integer",
+                    "description": "排序"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                }
+            },
+            "required": [
+                "id",
+                "parentId",
+                "name",
+                "sort",
+                "status"
+            ]
+        },
+        "AdminCore.V1DeptDeleteReq": {
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "type": "string",
+                    "description": "部门ID，多个以英文逗号(,)分割"
+                }
+            },
+            "required": [
+                "ids"
+            ]
+        },
+        "AdminCore.V1DictPageReq": {
+            "type": "object",
+            "properties": {
+                "keywords": {
+                    "type": "string",
+                    "description": "关键字(类型名称/类型编码)"
+                },
+                "typeCode": {
+                    "type": "string",
+                    "description": "字典类型编码"
+                },
+                "pageNum": {
+                    "type": "integer",
+                    "description": "页码"
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "description": "每页记录数"
+                }
+            },
+            "required": [
+                "keywords",
+                "typeCode",
+                "pageNum",
+                "pageSize"
+            ]
+        },
+        "AdminCore.V1DictPageRsp": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "type": "array",
+                    "description": "列表",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.V1DictItem"
+                    }
+                },
+                "total": {
+                    "type": "number",
+                    "description": "总记录数"
+                }
+            },
+            "required": [
+                "list",
+                "total"
+            ]
+        },
+        "AdminCore.V1DictItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "主键"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "字典名称"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "字典值"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "value",
+                "remark",
+                "status"
+            ]
+        },
+        "AdminCore.V1DictOptionsReq": {
+            "type": "object",
+            "properties": {
+                "typeCode": {
+                    "type": "string",
+                    "description": "字典类型编码"
+                }
+            },
+            "required": [
+                "typeCode"
+            ]
+        },
+        "AdminCore.V1DictOptionsRsp": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "description": "选项列表",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.StringOptions"
+                    }
+                }
+            },
+            "required": [
+                "items"
+            ]
+        },
+        "AdminCore.StringOptions": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "description": "选项ID"
+                },
+                "label": {
+                    "type": "string",
+                    "description": "选项名称"
+                },
+                "children": {
+                    "type": "array",
+                    "description": "子选项",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.StringOptions"
+                    }
+                }
+            },
+            "required": [
+                "value",
+                "label",
+                "children"
+            ]
+        },
+        "AdminCore.V1DictFormReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "字典ID"
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "AdminCore.V1DictFormRsp": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "主键"
+                },
+                "typeCode": {
+                    "type": "string",
+                    "description": "类型编码"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "字典名称"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "字典值"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                },
+                "sort": {
+                    "type": "integer",
+                    "description": "排序"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注"
+                }
+            },
+            "required": [
+                "id",
+                "typeCode",
+                "name",
+                "value",
+                "status",
+                "sort",
+                "remark"
+            ]
+        },
+        "AdminCore.V1DictAddReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "主键"
+                },
+                "typeCode": {
+                    "type": "string",
+                    "description": "类型编码"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "字典名称"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "字典值"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                },
+                "sort": {
+                    "type": "integer",
+                    "description": "排序"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注"
+                }
+            },
+            "required": [
+                "id",
+                "typeCode",
+                "name",
+                "value",
+                "status",
+                "sort",
+                "remark"
+            ]
+        },
+        "AdminCore.V1DictUpdateReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "主键"
+                },
+                "typeCode": {
+                    "type": "string",
+                    "description": "类型编码"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "字典名称"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "字典值"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                },
+                "sort": {
+                    "type": "integer",
+                    "description": "排序"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注"
+                }
+            },
+            "required": [
+                "id",
+                "typeCode",
+                "name",
+                "value",
+                "status",
+                "sort",
+                "remark"
+            ]
+        },
+        "AdminCore.V1DictDeleteReq": {
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "type": "string",
+                    "description": "字典ID，多个以英文逗号(,)拼接"
+                }
+            },
+            "required": [
+                "ids"
+            ]
+        },
+        "AdminCore.V1DictTypesPageReq": {
+            "type": "object",
+            "properties": {
+                "keywords": {
+                    "type": "string",
+                    "description": "关键字(类型名称/类型编码)"
+                },
+                "pageNum": {
+                    "type": "integer",
+                    "description": "页码"
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "description": "每页记录数"
+                }
+            },
+            "required": [
+                "keywords",
+                "pageNum",
+                "pageSize"
+            ]
+        },
+        "AdminCore.V1DictTypesPageRsp": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "type": "array",
+                    "description": "列表",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.V1DictTypesItem"
+                    }
+                },
+                "total": {
+                    "type": "number",
+                    "description": "总记录数"
+                }
+            },
+            "required": [
+                "list",
+                "total"
+            ]
+        },
+        "AdminCore.V1DictTypesItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "主键"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "类型名称"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "类型编码"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "code",
+                "remark",
+                "status"
+            ]
+        },
+        "AdminCore.V1DictTypesFormReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "主键"
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "AdminCore.V1DictTypesFormRsp": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "主键"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "类型名称"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "类型编码"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "code",
+                "status",
+                "remark"
+            ]
+        },
+        "AdminCore.V1DictTypesAddReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "主键"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "类型名称"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "类型编码-必填"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "code",
+                "status",
+                "remark"
+            ]
+        },
+        "AdminCore.V1DictTypesUpdateReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "主键"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "类型名称"
+                },
+                "code": {
+                    "type": "string",
+                    "description": "类型编码"
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "状态 取值范围及含义: 1 - 启用; 0 - 停用;"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "code",
+                "status",
+                "remark"
+            ]
+        },
+        "AdminCore.V1DictTypesDeleteReq": {
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "type": "string",
+                    "description": "字典类型ID，多个以英文逗号(,)分割"
+                }
+            },
+            "required": [
+                "ids"
+            ]
+        },
+        "AdminCore.V1FilesUploadRsp": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "文件名"
+                },
+                "url": {
+                    "type": "string",
+                    "description": "文件URL"
+                }
+            },
+            "required": [
+                "name",
+                "url"
+            ]
+        },
+        "AdminCore.V1FilesDeleteReq": {
+            "type": "object",
+            "properties": {
+                "filePath": {
+                    "type": "string",
+                    "description": "文件路径"
+                }
+            },
+            "required": [
+                "filePath"
+            ]
+        },
+        "AdminCore.V1FileFetchReq": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "description": "文件URL"
+                }
+            },
+            "required": [
+                "url"
+            ]
+        },
+        "AdminCore.V1FilePageReq": {
+            "type": "object",
+            "properties": {
+                "pageNum": {
+                    "type": "integer",
+                    "description": "页码"
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "description": "每页数量"
+                },
+                "vendor": {
+                    "type": "string",
+                    "description": "文件存储提供商"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "文件名"
+                }
+            },
+            "required": [
+                "pageNum",
+                "pageSize",
+                "vendor",
+                "name"
+            ]
+        },
+        "AdminCore.V1FilePageRsp": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "description": "文件列表",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.V1FileItem"
+                    }
+                },
+                "total": {
+                    "type": "number",
+                    "description": "总数"
+                }
+            },
+            "required": [
+                "items",
+                "total"
+            ]
+        },
+        "AdminCore.V1FileItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "文件ID"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "文件名"
+                },
+                "url": {
+                    "type": "string",
+                    "description": "文件URL"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "文件key"
+                },
+                "vendor": {
+                    "type": "string",
+                    "description": "菜单类型 取值范围及含义: local - 本机存储; qiniu - 七牛存储; aliyun - 阿里云存储; tencent - 腾讯云存储;"
+                },
+                "createTime": {
+                    "type": "string",
+                    "description": "创建时间"
+                },
+                "deleted": {
+                    "type": "boolean",
+                    "description": "是否删除"
+                },
+                "vendorName": {
+                    "type": "string",
+                    "description": "文件存储提供商"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "url",
+                "key",
+                "vendor",
+                "createTime",
+                "deleted",
+                "vendorName"
+            ]
+        },
+        "AdminCore.V1FileFormReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "文件 ID"
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "AdminCore.V1FileFromRsp": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "文件ID"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "文件名"
+                },
+                "url": {
+                    "type": "string",
+                    "description": "文件URL"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "文件key"
+                },
+                "vendor": {
+                    "type": "string",
+                    "description": "菜单类型 取值范围及含义: local - 本机存储; qiniu - 七牛存储; aliyun - 阿里云存储; tencent - 腾讯云存储;"
+                },
+                "createTime": {
+                    "type": "string",
+                    "description": "创建时间"
+                },
+                "deleted": {
+                    "type": "boolean",
+                    "description": "是否删除"
+                },
+                "vendorName": {
+                    "type": "string",
+                    "description": "文件存储提供商"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "url",
+                "key",
+                "vendor",
+                "createTime",
+                "deleted",
+                "vendorName",
+                "createTime"
+            ]
+        },
+        "AdminCore.V1FileUpdateReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "文件ID"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "文件名"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ]
+        },
+        "AdminCore.V1FilesZoneRsp": {
+            "type": "object",
+            "properties": {
+                "qiniu": {
+                    "type": "array",
+                    "description": "文件存储提供商列表",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.StringOptionItem"
+                    }
+                }
+            },
+            "required": [
+                "qiniu"
+            ]
+        },
+        "AdminCore.StringOptionItem": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "description": "选项ID"
+                },
+                "label": {
+                    "type": "string",
+                    "description": "选项名称"
+                }
+            },
+            "required": [
+                "value",
+                "label"
+            ]
+        },
+        "AdminCore.V1FilesVendorsRsp": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "description": "文件存储提供商列表",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.StringOptions"
+                    }
+                },
+                "current": {
+                    "type": "object",
+                    "description": "当前文件存储提供商",
+                    "$ref": "#/definitions/AdminCore.V1VendorItem"
+                }
+            },
+            "required": [
+                "items",
+                "current"
+            ]
+        },
+        "AdminCore.V1VendorItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "主键"
+                },
+                "vendor": {
+                    "type": "string",
+                    "description": "文件存储提供商"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "配置名"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "配置键"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "配置值"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注"
+                },
+                "updateTime": {
+                    "type": "string",
+                    "description": "更新时间"
+                }
+            },
+            "required": [
+                "id",
+                "vendor",
+                "name",
+                "key",
+                "value",
+                "remark",
+                "updateTime"
+            ]
+        },
+        "AdminCore.V1VendorPageReq": {
+            "type": "object",
+            "properties": {
+                "vendor": {
+                    "type": "string",
+                    "description": "文件存储提供商"
+                },
+                "pageNum": {
+                    "type": "integer",
+                    "description": "页码"
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "description": "每页记录数"
+                }
+            },
+            "required": [
+                "vendor",
+                "pageNum",
+                "pageSize"
+            ]
+        },
+        "AdminCore.V1VendorPageRsp": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "description": "列表",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.V1VendorItem"
+                    }
+                },
+                "total": {
+                    "type": "number",
+                    "description": "总记录数"
+                }
+            },
+            "required": [
+                "items",
+                "total"
+            ]
+        },
+        "AdminCore.V1VendorFormReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "配置 id"
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "AdminCore.V1VendorFormRsp": {
+            "type": "object",
+            "properties": {
+                "item": {
+                    "type": "object",
+                    "description": "配置项",
+                    "$ref": "#/definitions/AdminCore.V1VendorItem"
+                },
+                "options": {
+                    "type": "array",
+                    "description": "文件存储提供商列表",
+                    "items": {
+                        "$ref": "#/definitions/AdminCore.StringOptionItem"
+                    }
+                }
+            },
+            "required": [
+                "item",
+                "options"
+            ]
+        },
+        "AdminCore.V1VendorUpdateReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "主键"
+                },
+                "vendor": {
+                    "type": "string",
+                    "description": "文件存储提供商"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "配置名"
+                },
+                "key": {
+                    "type": "string",
+                    "description": "配置键"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "配置值"
+                },
+                "remark": {
+                    "type": "string",
+                    "description": "备注"
+                }
+            },
+            "required": [
+                "id",
+                "vendor",
+                "name",
+                "key",
+                "value",
+                "remark"
+            ]
+        }
+    }
+}
