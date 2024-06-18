@@ -1,3 +1,8 @@
+# 线上 demo
+[admindemo](http://admindemo.zuxing.net/)
+- 用户名 admin
+- 密码 123456
+
 # 引入本项目
 
 下面为一个例子
