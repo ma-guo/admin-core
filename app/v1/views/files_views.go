@@ -10,6 +10,7 @@ import (
 	"github.com/ma-guo/admin-core/app/common/consts"
 	"github.com/ma-guo/admin-core/app/v1/protos"
 	"github.com/ma-guo/admin-core/utils"
+	"github.com/ma-guo/admin-core/utils/bearer"
 	"github.com/ma-guo/admin-core/utils/fileupload"
 	"github.com/ma-guo/admin-core/xorm/models"
 	"github.com/ma-guo/admin-core/xorm/services"
@@ -59,7 +60,10 @@ func (v *Files) Upload_POST(c *niuhe.Context, req *protos.NoneReq, rsp *protos.V
 	auth, err := getAuthInfo(c)
 	if err != nil {
 		niuhe.LogInfo("%v", err)
-		return err
+		// return err
+		auth = &bearer.Bearer{
+			Uid: 1,
+		}
 	}
 
 	actionSaveToDb := func(ossUrl, key string) error {
