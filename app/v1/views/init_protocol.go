@@ -31,6 +31,8 @@ type V1ApiProtocol struct {
 func (proto V1ApiProtocol) checkAuth(c *niuhe.Context) error {
 	path := c.Request.URL.Path
 	if _, has := proto.skipUrl[path]; has {
+		jtw := bearer.NewBearer(config.Config.Secretkey, 1, "tmpname")
+		c.Set(consts.Authorization, jtw)
 		return nil
 	}
 	token := c.GetHeader(consts.Authorization)
