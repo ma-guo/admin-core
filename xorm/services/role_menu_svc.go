@@ -2,33 +2,34 @@ package services
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/ma-guo/admin-core/xorm/models"
 
 	"github.com/ma-guo/niuhe"
 )
 
-type _RooleMenuSvc struct {
+type _RoleMenuSvc struct {
 	*_Svc
 }
 
-func (svc *_Svc) RoleMenu() *_RooleMenuSvc {
-	return &_RooleMenuSvc{svc}
+func (svc *_Svc) RoleMenu() *_RoleMenuSvc {
+	return &_RoleMenuSvc{svc}
 }
 
-func (svc *_RooleMenuSvc) GetById(rid, mid int64) (*models.SysRoleMenu, error) {
+func (svc *_RoleMenuSvc) GetById(rid, mid int64) (*models.SysRoleMenu, error) {
 	if mid <= 0 || rid <= 0 {
 		return nil, fmt.Errorf("角色信息不存在")
 	}
 	return svc.dao().RoleMenu().GetBy(rid, mid)
 }
 
-func (svc *_RooleMenuSvc) Delete(rid, mid int64) error {
+func (svc *_RoleMenuSvc) Delete(rid, mid int64) error {
 	_, err := svc.dao().RoleMenu().Delete(&models.SysRoleMenu{RoleId: rid, MenuId: mid})
 	return err
 }
 
-func (svc *_RooleMenuSvc) Add(row *models.SysRoleMenu) (*models.SysRoleMenu, error) {
+func (svc *_RoleMenuSvc) Add(row *models.SysRoleMenu) (*models.SysRoleMenu, error) {
 	has := svc.Has(row)
 	if has {
 		return row, nil
@@ -40,12 +41,12 @@ func (svc *_RooleMenuSvc) Add(row *models.SysRoleMenu) (*models.SysRoleMenu, err
 	return row, nil
 }
 
-func (svc *_RooleMenuSvc) Has(row *models.SysRoleMenu) bool {
+func (svc *_RoleMenuSvc) Has(row *models.SysRoleMenu) bool {
 	has, _ := svc.dao().RoleMenu().Has(row)
 	return has
 }
 
-func (svc *_RooleMenuSvc) Update(rid int64, menuIds ...int64) error {
+func (svc *_RoleMenuSvc) Update(rid int64, menuIds ...int64) error {
 	rows, err := svc.dao().RoleMenu().GetRoleMenus(rid)
 	if err != nil {
 		niuhe.LogInfo("%v", err)
@@ -90,10 +91,40 @@ func (svc *_RooleMenuSvc) Update(rid int64, menuIds ...int64) error {
 }
 
 // 获取角色对应的菜单id
-func (svc *_RooleMenuSvc) GetRoleMenus(rid ...int64) ([]*models.SysRoleMenu, error) {
+func (svc *_RoleMenuSvc) GetRoleMenus(rid ...int64) ([]*models.SysRoleMenu, error) {
 	return svc.dao().RoleMenu().GetRoleMenus(rid...)
 }
 
-func (svc *_RooleMenuSvc) GetAll() ([]*models.SysRoleMenu, error) {
+func (svc *_RoleMenuSvc) GetAll() ([]*models.SysRoleMenu, error) {
 	return svc.dao().RoleMenu().GetAll()
+}
+
+// / 根据用户 id 获取对应的按钮
+func (svc *_RoleMenuSvc) GetMenusByUid(uid int64) (map[int64]int64, error) {
+	prefix := "menusByUid"
+	cache, has := svc.dao().GetCache(prefix, uid)
+	if has {
+		return cache.(map[int64]int64), nil
+	}
+	roles, err := svc.Role().GetByUserId(uid)
+	if err != nil {
+		niuhe.LogInfo("%v", err)
+		return nil, err
+	}
+	roleIds := make([]int64, 0)
+	for _, role := range roles {
+		roleIds = append(roleIds, role.Id)
+	}
+	roleMenus, err := svc.RoleMenu().GetRoleMenus(roleIds...)
+	if err != nil {
+		niuhe.LogInfo("%v", err)
+		return nil, err
+	}
+	tmp := make(map[int64]int64, 0)
+	for _, row := range roleMenus {
+		tmp[row.MenuId] = row.MenuId
+	}
+	svc.dao().SetCache(tmp, 5*time.Minute, prefix, uid)
+
+	return tmp, nil
 }

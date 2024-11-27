@@ -49,3 +49,8 @@ func (v *_Gen_Menus) Update_POST(c *niuhe.Context, req *protos.V1MenusUpdateReq,
 func (v *_Gen_Menus) Status_POST(c *niuhe.Context, req *protos.V1MenusStatusReq, rsp *protos.NoneRsp) error {
 	return niuhe.NewCommError(-1, "Not Implemented")
 }
+
+// 菜单分页列表
+func (v *_Gen_Menus) Page_GET(c *niuhe.Context, req *protos.V1MenusPageReq, rsp *protos.V1MenusPageRsp) error {
+	return niuhe.NewCommError(-1, "Not Implemented")
+}

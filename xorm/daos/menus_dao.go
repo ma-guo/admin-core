@@ -73,11 +73,11 @@ func (dao *_MenuDao) GetAll(keyword string) ([]*models.SysMenu, error) {
 	return rows, nil
 }
 
-func (dao *_MenuDao) GetPage(keyword string, deptId int64, page, size int) ([]*models.SysMenu, int64, error) {
+func (dao *_MenuDao) GetPage(keyword string, menuType, page, size int) ([]*models.SysMenu, int64, error) {
 	rows := make([]*models.SysMenu, 0)
-	session := dao.db().Where("`user_name` LIKE ? OR `nickname` LIKE ?", "%"+keyword+"%", "%"+keyword+"%")
-	if deptId > 0 {
-		session.And("`dept_id`=?", deptId)
+	session := dao.db().Where("`name` LIKE ? OR `path` LIKE ?", "%"+keyword+"%", "%"+keyword+"%")
+	if menuType > 0 {
+		session.And("`type`=?", menuType)
 	}
 	total, err := session.Asc("`sort`").Limit(size, page*size-size).FindAndCount(&rows)
 	if err != nil {

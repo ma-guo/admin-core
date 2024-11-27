@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/ma-guo/admin-core/app/common/consts"
+	"github.com/ma-guo/admin-core/app/v1/protos"
 	"github.com/ma-guo/admin-core/utils/bearer"
 
 	"github.com/ma-guo/niuhe"
@@ -56,8 +57,11 @@ func GetProtocol() *V1ApiProtocol {
 				"/api/v1/auth/captcha/": true,
 				"/api/v1/files/fetch/":  true,
 			},
-			proxy: nil,
+			proxy:     nil,
+			routes:    []*protos.RouteItem{},
+			routeInit: false,
 		}
+		protocol.AddRoute("/api", protos.RouteItems)
 	}
 
 	return protocol
@@ -77,7 +81,12 @@ func GetModule() *niuhe.Module {
 	if thisModule == nil {
 		// 在路由前统一添加 api 前缀
 		thisModule = niuhe.NewModuleWithProtocolFactoryFunc("api/v1", func() niuhe.IApiProtocol {
-			return GetProtocol()
+			protocol := GetProtocol()
+			err := protocol.InitRoute()
+			if err != nil {
+				niuhe.LogInfo("init protocol error: %v", err)
+			}
+			return protocol
 		})
 		// thisModule = niuhe.NewModule("api")
 	}

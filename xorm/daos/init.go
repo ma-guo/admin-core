@@ -40,20 +40,20 @@ func (dao *Dao) Atom(fn func() error) error {
 	}
 	return nil
 }
-func (dao *Dao) getCache(prefix string, args ...interface{}) (interface{}, bool) {
-	key := prefix
-	for _, arg := range args {
+func (dao *Dao) GetCache(keyPrefix string, keyArgs ...interface{}) (interface{}, bool) {
+	key := keyPrefix
+	for _, arg := range keyArgs {
 		key += fmt.Sprintf(":%v", arg)
 	}
 	return localCache.Get(key)
 }
 
-func (dao *Dao) setCache(val interface{}, duration time.Duration, prefix string, args ...interface{}) {
-	key := prefix
-	for _, arg := range args {
+func (dao *Dao) SetCache(value interface{}, duration time.Duration, keyPrefix string, keyArgs ...interface{}) {
+	key := keyPrefix
+	for _, arg := range keyArgs {
 		key += fmt.Sprintf(":%v", arg)
 	}
-	localCache.Set(key, val, duration)
+	localCache.Set(key, value, duration)
 }
 
 var localCache *cache.Cache

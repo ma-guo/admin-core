@@ -4,12 +4,16 @@ import (
 	"fmt"
 	"net/http"
 	"reflect"
+	"strings"
 	"time"
 
 	"github.com/ma-guo/admin-core/config"
 	"github.com/ma-guo/admin-core/utils/bearer"
+	"github.com/ma-guo/admin-core/xorm/models"
+	"github.com/ma-guo/admin-core/xorm/services"
 
 	"github.com/ma-guo/admin-core/app/common/consts"
+	"github.com/ma-guo/admin-core/app/v1/protos"
 
 	"github.com/ma-guo/niuhe"
 	"github.com/ma-guo/zpform"
@@ -23,13 +27,59 @@ type isCustomRoot interface {
 }
 
 type V1ApiProtocol struct {
-	store   *cache.Cache
-	skipUrl map[string]bool
-	proxy   niuhe.IApiProtocol
+	store     *cache.Cache
+	skipUrl   map[string]bool
+	proxy     niuhe.IApiProtocol
+	routes    []*protos.RouteItem // 路由列表
+	routeInit bool                // 路由是否已经初始化
+}
+
+// 检查权限
+func (proto V1ApiProtocol) checkPers(c *niuhe.Context, jwt *bearer.Bearer) error {
+	path := c.Request.URL.Path
+	method := c.Request.Method
+	key := "checkPers"
+	// niuhe.LogInfo("check %v", path)
+	if _, has := proto.getCache(key, jwt.Uid, method, path); has {
+		// niuhe.LogInfo("has menu cache %v", path)
+		return nil
+	}
+	svc := services.NewSvc()
+	defer svc.Close()
+	menus, err := svc.Api().GetMenus(method, path)
+	if err != nil {
+		niuhe.LogInfo("%v", err)
+		return err
+	}
+	if len(menus) == 0 {
+		proto.cacheMinute(menus, key, jwt.Uid, method, path)
+		// niuhe.LogInfo("no menu cache %v", path)
+		return nil
+	}
+
+	roleMenus, err := svc.RoleMenu().GetMenusByUid(jwt.Uid)
+	if err != nil {
+		niuhe.LogInfo("%v", err)
+		return err
+	}
+	for _, menu := range menus {
+		if menu.Type != consts.MenuTypeGroup.BUTTON.Value {
+			continue
+		}
+
+		// 存在一个权限就可以了
+		if _, has := roleMenus[menu.Id]; has {
+			// niuhe.LogInfo("has menu pers %v, %v", menu.Id, path)
+			proto.cacheMinute(menus, key, jwt.Uid, method, path)
+			return nil
+		}
+	}
+	return fmt.Errorf("无API访问权限")
 }
 
 func (proto V1ApiProtocol) checkAuth(c *niuhe.Context) error {
 	path := c.Request.URL.Path
+	// 跳过 url 不检查权限
 	if _, has := proto.skipUrl[path]; has {
 		jtw := bearer.NewBearer(config.Config.Secretkey, 1, "tmpname")
 		c.Set(consts.Authorization, jtw)
@@ -43,16 +93,89 @@ func (proto V1ApiProtocol) checkAuth(c *niuhe.Context) error {
 	if old, has := proto.getCache(consts.Authorization, token); has {
 		jwt := old.(*bearer.Bearer)
 		c.Set(consts.Authorization, jwt)
+		err := proto.checkPers(c, jwt)
+		if err != nil {
+			niuhe.LogInfo("%v %v", jwt.Username, err)
+			return niuhe.NewCommError(consts.PersError, "无API访问权限")
+		}
 		return nil
 	}
-	jtw := bearer.NewBearer(config.Config.Secretkey, 0, "")
-	err := jtw.Parse(token)
+	jwt := bearer.NewBearer(config.Config.Secretkey, 0, "")
+	err := jwt.Parse(token)
 	if err != nil {
 		niuhe.LogInfo("%v", err)
 		return niuhe.NewCommError(consts.AuthError, err.Error())
 	}
-	c.Set(consts.Authorization, jtw)
-	proto.setCache(jtw, 5*time.Minute, consts.Authorization, token)
+	err = proto.checkPers(c, jwt)
+	if err != nil {
+		niuhe.LogInfo("%v %v", jwt.Username, err)
+		return niuhe.NewCommError(consts.PersError, "无API访问权限")
+	}
+	c.Set(consts.Authorization, jwt)
+	proto.setCache(jwt, 5*time.Minute, consts.Authorization, token)
+	return nil
+}
+
+// 添加路由, prefix 一般情况下设置为空即可
+func (proto *V1ApiProtocol) AddRoute(prefix string, routes []*protos.RouteItem) {
+	if proto.routes == nil {
+		proto.routes = make([]*protos.RouteItem, 0)
+	}
+	// 添加前缀
+	for _, route := range routes {
+		if prefix != "" && strings.Index(route.Path, prefix) != 0 {
+			route.Path = prefix + route.Path
+		}
+	}
+	proto.routes = append(proto.routes, routes...)
+}
+
+// / 初始化路由
+func (proto *V1ApiProtocol) InitRoute() error {
+	if proto.routeInit {
+		return nil
+	}
+	proto.routeInit = true
+	svc := services.NewSvc()
+	defer svc.Close()
+	apis, err := svc.Api().GetAll()
+	if err != nil {
+		niuhe.LogInfo("%v", err)
+		return err
+	}
+	for _, route := range proto.routes {
+
+		hasApi := false
+		for _, api := range apis {
+			if route.Method == api.Method && route.Path == api.Path {
+				// 名字相同的则不处理
+				hasApi = true
+				if api.Name != route.Name {
+					api.Name = route.Name
+					// 更新 name 字段
+					err = svc.Api().Update(api.Id, api)
+					if err != nil {
+						niuhe.LogInfo("update error %v", err)
+						return err
+					}
+				}
+				break
+			}
+		}
+		if !hasApi {
+			err = svc.Api().Insert(&models.SysApi{
+				Method:  route.Method,
+				Path:    route.Path,
+				Name:    route.Name,
+				Remark:  "",
+				MenuIds: []int64{},
+			})
+			if err != nil {
+				niuhe.LogInfo("insert error: %v", err)
+				return err
+			}
+		}
+	}
 	return nil
 }
 
@@ -123,4 +246,8 @@ func (proto *V1ApiProtocol) setCache(val interface{}, duration time.Duration, pr
 		key += fmt.Sprintf(":%v", arg)
 	}
 	proto.store.Set(key, val, duration)
+}
+
+func (proto *V1ApiProtocol) cacheMinute(val interface{}, prefix string, args ...interface{}) {
+	proto.setCache(val, 1*time.Minute, prefix, args...)
 }

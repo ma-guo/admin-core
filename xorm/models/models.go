@@ -1,6 +1,8 @@
 package models
 
-import "time"
+import (
+	"time"
+)
 
 // deleted 删除后前端不可见, 仅可数据库操作恢复
 // 属性定义参考 https://xorm.io/zh/docs/chapter-02/4.columns/
@@ -121,14 +123,25 @@ type (
 	}
 	// OSS 服务配置信息
 	SysVendor struct {
-		Id         int64     `xorm:"NOTNULL PK AUTOINCR INT(11) COMMENT('主键')"`            // 排序 ID
-		Vendor     string    `xorm:"VARCHAR(64) NULL DEFAULT('') INDEX COMMENT('字典类型编码')"` // 提供商名字
-		Name       string    `xorm:"VARCHAR(50) NULL DEFAULT('') COMMENT('字典项名称')"`        // 配置名称
-		Key        string    `xorm:"VARCHAR(50) NULL DEFAULT('') INDEX COMMENT('配置key')"`  // 配置key
-		Value      string    `xorm:"VARCHAR(255) NULL DEFAULT('') COMMENT('字典项值')"`        // 配置值
-		Remark     string    `xorm:"VARCHAR(255) NULL DEFAULT('') COMMENT('备注')"`          // 备注
-		CreateTime time.Time `xorm:"created COMMENT('创建时间)"`                               // 创建时间
-		UpdateTime time.Time `xorm:"updated COMMENT('更新时间')"`                              // 更新时间
+		Id         int64     `xorm:"NOTNULL PK AUTOINCR INT(11) COMMENT('主键')"`           // 排序 ID
+		Vendor     string    `xorm:"VARCHAR(64) NULL DEFAULT('') INDEX COMMENT('提供商名字')"` // 提供商名字
+		Name       string    `xorm:"VARCHAR(50) NULL DEFAULT('') COMMENT('配置名称')"`        // 配置名称
+		Key        string    `xorm:"VARCHAR(50) NULL DEFAULT('') INDEX COMMENT('配置key')"` // 配置key
+		Value      string    `xorm:"VARCHAR(255) NULL DEFAULT('') COMMENT('配置值')"`        // 配置值
+		Remark     string    `xorm:"VARCHAR(255) NULL DEFAULT('') COMMENT('备注')"`         // 备注
+		CreateTime time.Time `xorm:"created COMMENT('创建时间)"`                              // 创建时间
+		UpdateTime time.Time `xorm:"updated COMMENT('更新时间')"`                             // 更新时间
+	}
+	// API 权限处理
+	SysApi struct {
+		Id         int64     `xorm:"NOTNULL PK AUTOINCR INT(11) COMMENT('主键')"`                 // 排序 ID
+		Method     string    `xorm:"VARCHAR(16) NULL DEFAULT('GET') COMMENT('请求方法')"`           // 请求方法
+		Path       string    `xorm:"VARCHAR(64) NULL DEFAULT('') INDEX COMMENT('API 路径')"`      // API 路径
+		Name       string    `xorm:"VARCHAR(255) NULL DEFAULT('') COMMENT('API名称')"`            // API名称
+		MenuIds    []int64   `xorm:"VARCHAR(255) NOT NULL DEFAULT('[]') INDEX COMMENT('权限ID')"` // 权限ID
+		Remark     string    `xorm:"VARCHAR(255) NULL DEFAULT('') COMMENT('备注')"`               // 备注
+		CreateTime time.Time `xorm:"created COMMENT('创建时间)"`                                    // 创建时间
+		UpdateTime time.Time `xorm:"updated COMMENT('更新时间')"`                                   // 更新时间
 	}
 )
 
@@ -144,5 +157,6 @@ func GetSyncModels() []interface{} {
 		new(SysUserRole),
 		new(SysFile),
 		new(SysVendor),
+		new(SysApi),
 	}
 }

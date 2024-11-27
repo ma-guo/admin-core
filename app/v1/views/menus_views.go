@@ -332,6 +332,30 @@ func (v *Menus) Status_POST(c *niuhe.Context, req *protos.V1MenusStatusReq, rsp 
 	}
 	return nil
 }
+
+// 菜单分页列表
+func (v *Menus) Page_GET(c *niuhe.Context, req *protos.V1MenusPageReq, rsp *protos.V1MenusPageRsp) error {
+	svc := services.NewSvc()
+	defer svc.Close()
+	rows, total, err := svc.Menu().GetPage(req.Keywords, req.Type, req.PageNum, req.PageSize)
+	if err != nil {
+		niuhe.LogInfo("%v", err)
+		return err
+	}
+	rsp.Total = total
+	rsp.Items = make([]*protos.V1MenuTiny, 0)
+	for _, row := range rows {
+		item := &protos.V1MenuTiny{
+			Id:   row.Id,
+			Name: row.Name,
+			Perm: row.Perm,
+		}
+		rsp.Items = append(rsp.Items, item)
+	}
+
+	return nil
+}
+
 func init() {
 	GetModule().Register(&Menus{})
 }

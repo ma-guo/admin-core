@@ -72,6 +72,6 @@ func (svc *_MenuSvc) GetAll(keyword string) ([]*models.SysMenu, error) {
 	return svc.dao().Menu().GetAll(strings.Trim(keyword, " "))
 }
 
-func (svc *_MenuSvc) GetPage(keyword string, deptId int64, page, size int) ([]*models.SysMenu, int64, error) {
-	return svc.dao().Menu().GetPage(keyword, deptId, page, size)
+func (svc *_MenuSvc) GetPage(keyword string, menuType, page, size int) ([]*models.SysMenu, int64, error) {
+	return svc.dao().Menu().GetPage(keyword, menuType, page, size)
 }

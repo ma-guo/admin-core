@@ -3,6 +3,7 @@ package utils
 import (
 	"io"
 	"mime/multipart"
+	"net/http"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -12,6 +13,16 @@ import (
 )
 
 const passwordSalt = "admin"
+
+var httpMethods = map[int]string{
+	niuhe.GET:     http.MethodGet,
+	niuhe.POST:    http.MethodPost,
+	niuhe.PUT:     http.MethodPut,
+	niuhe.DELETE:  http.MethodDelete,
+	niuhe.PATCH:   http.MethodPatch,
+	niuhe.HEAD:    http.MethodHead,
+	niuhe.OPTIONS: http.MethodOptions,
+}
 
 // func GenPassword(password string) string {
 // 	return password
@@ -96,4 +107,8 @@ func CopyFile(src, dst string) (err error) {
 		niuhe.LogInfo("copy %v", err)
 	}
 	return
+}
+
+func GetHttpMethod() map[int]string {
+	return httpMethods
 }

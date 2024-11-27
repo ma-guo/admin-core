@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/ma-guo/admin-core/app/common/consts"
@@ -101,4 +102,8 @@ func (row *SysVendor) ToProps() *protos.V1VendorItem {
 		Key:        row.Key,
 		UpdateTime: row.UpdateTime.Format(consts.FullTimeLayout),
 	}
+}
+
+func (row *SysApi) GetKey() string {
+	return fmt.Sprintf("%v:%s", row.Method, row.Path)
 }
