@@ -80,14 +80,21 @@ func (proto V1ApiProtocol) checkPers(c *niuhe.Context, jwt *bearer.Bearer) error
 func (proto V1ApiProtocol) checkAuth(c *niuhe.Context) error {
 	path := c.Request.URL.Path
 	// 跳过 url 不检查权限
+	isSkipUrl := false
 	if _, has := proto.skipUrl[path]; has {
-		jtw := bearer.NewBearer(config.Config.Secretkey, 1, "tmpname")
-		c.Set(consts.Authorization, jtw)
-		return nil
+		isSkipUrl = true
+	}
+	skipOrError := func(code int, message string) error {
+		if isSkipUrl {
+			jtw := bearer.NewBearer(config.Config.Secretkey, 1, "tmpname")
+			c.Set(consts.Authorization, jtw)
+			return nil
+		}
+		return niuhe.NewCommError(code, message)
 	}
 	token := c.GetHeader(consts.Authorization)
 	if len(token) < 10 {
-		return niuhe.NewCommError(consts.AuthError, "token error")
+		return skipOrError(consts.AuthError, "token error")
 	}
 	token = token[len(consts.Bearer)+1:]
 	if old, has := proto.getCache(consts.Authorization, token); has {
@@ -96,7 +103,7 @@ func (proto V1ApiProtocol) checkAuth(c *niuhe.Context) error {
 		err := proto.checkPers(c, jwt)
 		if err != nil {
 			niuhe.LogInfo("%v %v", jwt.Username, err)
-			return niuhe.NewCommError(consts.PersError, "无API访问权限")
+			return skipOrError(consts.PersError, "无API访问权限")
 		}
 		return nil
 	}
@@ -104,12 +111,12 @@ func (proto V1ApiProtocol) checkAuth(c *niuhe.Context) error {
 	err := jwt.Parse(token)
 	if err != nil {
 		niuhe.LogInfo("%v", err)
-		return niuhe.NewCommError(consts.AuthError, err.Error())
+		return skipOrError(consts.AuthError, err.Error())
 	}
 	err = proto.checkPers(c, jwt)
 	if err != nil {
 		niuhe.LogInfo("%v %v", jwt.Username, err)
-		return niuhe.NewCommError(consts.PersError, "无API访问权限")
+		return skipOrError(consts.PersError, "无API访问权限")
 	}
 	c.Set(consts.Authorization, jwt)
 	proto.setCache(jwt, 5*time.Minute, consts.Authorization, token)
