@@ -638,9 +638,9 @@ type V1FileFromRsp struct {
 	Url        string `json:"url" zpf_name:"url" zpf_reqd:"true"`               //	文件URL
 	Key        string `json:"key" zpf_name:"key"`                               //	文件key
 	Vendor     string `json:"vendor" zpf_name:"vendor"`                         //	菜单类型 取值范围及含义: local - 本机存储; qiniu - 七牛存储; aliyun - 阿里云存储; tencent - 腾讯云存储;
-	CreateTime string `json:"createTime" zpf_name:"createTime" zpf_reqd:"true"` //	创建时间
 	Deleted    bool   `json:"deleted" zpf_name:"deleted"`                       //	是否删除
 	VendorName string `json:"vendorName" zpf_name:"vendorName"`                 //	文件存储提供商
+	CreateTime string `json:"createTime" zpf_name:"createTime" zpf_reqd:"true"` //	创建时间
 }
 
 type V1FileUpdateReq struct {

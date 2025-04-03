@@ -35,6 +35,7 @@ var MenuStatusEnum struct {
 	InVisible niuhe.IntConstItem `name:"隐藏" value:"0"` // value: 0, name: 隐藏
 }
 
+// 菜单状态枚举
 var MenuTypeEnum struct {
 	*niuhe.StringConstGroup
 	NULL    niuhe.StringConstItem `name:"无类型" value:"NULL"`   // value: NULL, name: 无类型
@@ -53,6 +54,7 @@ var MenuTypeGroup struct {
 	BUTTON  niuhe.IntConstItem `name:"BUTTON" value:"4"`  // value: 4, name: BUTTON
 }
 
+// 七牛存储区域
 var QiniuZoneEnum struct {
 	*niuhe.StringConstGroup
 	Huadong   niuhe.StringConstItem `name:"华东机房" value:"ZoneHuadong"`              // value: ZoneHuadong, name: 华东机房
@@ -63,6 +65,7 @@ var QiniuZoneEnum struct {
 	ZheJiang2 niuhe.StringConstItem `name:"华东浙江 2 区" value:"ZoneHuadongZheJiang2"` // value: ZoneHuadongZheJiang2, name: 华东浙江 2 区
 }
 
+// 文件存储提供商
 var FileVendorEnum struct {
 	*niuhe.StringConstGroup
 	Local   niuhe.StringConstItem `name:"本机存储" value:"local"`    // value: local, name: 本机存储
