@@ -204,6 +204,9 @@ func (proto V1ApiProtocol) Write(c *niuhe.Context, rsp reflect.Value, err error)
 	if proto.proxy != nil {
 		return proto.proxy.Write(c, rsp, err)
 	}
+	if c.IsIgnoreResult() {
+		return nil
+	}
 	rspInst := rsp.Interface()
 	if _, ok := rspInst.(isCustomRoot); ok {
 		c.JSON(http.StatusOK, rspInst)
