@@ -211,10 +211,6 @@ func (proto V1ApiProtocol) Write(c *niuhe.Context, rsp reflect.Value, err error)
 		var response map[string]interface{}
 		if err != nil {
 			if commErr, ok := err.(niuhe.ICommError); ok {
-				if commErr.GetCode() == consts.CodeNoCommRsp {
-					// 已经处理了返回，不需要再处理
-					return nil
-				}
 				response = map[string]interface{}{
 					"result":  commErr.GetCode(),
 					"message": commErr.GetMessage(),

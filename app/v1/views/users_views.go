@@ -333,7 +333,8 @@ func (v *Users) Export_GET(c *niuhe.Context, req *protos.V1UsersPageReq, rsp *pr
 	c.File(fullName)
 	// 删除文件
 	os.Remove(fullName)
-	return niuhe.NewCommError(consts.CodeNoCommRsp, "已经处理了返回")
+	c.IgnoreResult()
+	return nil
 }
 
 // 用户导入模板下载
@@ -374,7 +375,8 @@ func (v *Users) Template_GET(c *niuhe.Context, req *protos.NoneReq, rsp *protos.
 	c.File(fullName)
 	// 删除文件
 	os.Remove(fullName)
-	return niuhe.NewCommError(consts.CodeNoCommRsp, "已经处理了返回")
+	c.IgnoreResult()
+	return nil
 }
 
 // 用户导入

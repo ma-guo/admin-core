@@ -194,7 +194,8 @@ func (v *Files) Fetch_GET(c *niuhe.Context, req *protos.V1FileFetchReq, rsp *pro
 	}
 	fullName := strings.Join([]string{fileDir, req.Url}, "/")
 	c.File(fullName)
-	return niuhe.NewCommError(consts.CodeNoCommRsp, "文件下载成功")
+	c.IgnoreResult()
+	return nil
 }
 
 // 文件分页请求
