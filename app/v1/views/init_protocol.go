@@ -13,7 +13,6 @@ import (
 	"github.com/ma-guo/admin-core/xorm/services"
 
 	"github.com/ma-guo/admin-core/app/common/consts"
-	"github.com/ma-guo/admin-core/app/v1/protos"
 
 	"github.com/ma-guo/niuhe"
 	"github.com/ma-guo/zpform"
@@ -30,8 +29,8 @@ type V1ApiProtocol struct {
 	store     *cache.Cache
 	skipUrl   map[string]bool
 	proxy     niuhe.IApiProtocol
-	routes    []*protos.RouteItem // 路由列表
-	routeInit bool                // 路由是否已经初始化
+	routes    []*niuhe.RouteItem // 路由列表
+	routeInit bool               // 路由是否已经初始化
 }
 
 // 检查权限
@@ -124,9 +123,9 @@ func (proto V1ApiProtocol) checkAuth(c *niuhe.Context) error {
 }
 
 // 添加路由, prefix 一般情况下设置为空即可
-func (proto *V1ApiProtocol) AddRoute(prefix string, routes []*protos.RouteItem) {
+func (proto *V1ApiProtocol) AddRoute(prefix string, routes []*niuhe.RouteItem) {
 	if proto.routes == nil {
-		proto.routes = make([]*protos.RouteItem, 0)
+		proto.routes = make([]*niuhe.RouteItem, 0)
 	}
 	// 添加前缀
 	for _, route := range routes {

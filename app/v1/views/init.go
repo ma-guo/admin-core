@@ -58,7 +58,7 @@ func GetProtocol() *V1ApiProtocol {
 				"/api/v1/files/fetch/":  true,
 			},
 			proxy:     nil,
-			routes:    []*protos.RouteItem{},
+			routes:    []*niuhe.RouteItem{},
 			routeInit: false,
 		}
 		protocol.AddRoute("/api", protos.RouteItems)
