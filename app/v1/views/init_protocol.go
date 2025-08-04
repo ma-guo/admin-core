@@ -213,6 +213,7 @@ func (proto V1ApiProtocol) Write(c *niuhe.Context, rsp reflect.Value, err error)
 		var response map[string]interface{}
 		if err != nil {
 			if commErr, ok := err.(niuhe.ICommError); ok {
+				c.CheckCode(commErr.GetCode())
 				response = map[string]interface{}{
 					"result":  commErr.GetCode(),
 					"message": commErr.GetMessage(),
@@ -221,6 +222,7 @@ func (proto V1ApiProtocol) Write(c *niuhe.Context, rsp reflect.Value, err error)
 					response["data"] = rsp.Interface()
 				}
 			} else {
+				c.CheckCode(-1)
 				response = map[string]interface{}{
 					"result":  -1,
 					"message": err.Error(),
