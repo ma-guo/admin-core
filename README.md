@@ -1,5 +1,5 @@
 # `niuhe` 教程
-在稀土掘金开了[niuhe 插件](https://juejin.cn/column/7376620206338785314) 系列教程。如有问题, 亦可咨询 `1057981162` (QQ/微信)
+[niuhe 插件官方教程](http://niuhe.zuxing.net/)详细介绍了 `niuhe` 插件的使用方法
 
 # 线上 demo
 [admindemo](http://admindemo.zuxing.net/)
