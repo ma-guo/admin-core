@@ -158,5 +158,7 @@ func GetSyncModels() []interface{} {
 		new(SysFile),
 		new(SysVendor),
 		new(SysApi),
+		new(SysDocument),
+		new(SysDraft),
 	}
 }

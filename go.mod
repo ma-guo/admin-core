@@ -5,10 +5,11 @@ go 1.23.6
 require (
 	github.com/aliyun/aliyun-oss-go-sdk v3.0.2+incompatible
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/flosch/pongo2 v0.0.0-20200913210552-0d938eb266f3
 	github.com/gin-gonic/gin v1.10.1
 	github.com/go-sql-driver/mysql v1.9.3
 	github.com/ma-guo/niuhe v1.0.5
-	github.com/ma-guo/zpform v1.0.0
+	github.com/ma-guo/zpform v1.0.1
 	github.com/mojocn/base64Captcha v1.3.8
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/qiniu/go-sdk/v7 v7.25.4

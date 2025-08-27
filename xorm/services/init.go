@@ -5,7 +5,8 @@ import (
 )
 
 type _Svc struct {
-	_dao *daos.Dao
+	_dao   *daos.Dao
+	prefix string
 }
 
 func NewSvc() *_Svc {
@@ -15,6 +16,7 @@ func NewSvc() *_Svc {
 func (svc *_Svc) dao() *daos.Dao {
 	if svc._dao == nil {
 		svc._dao = daos.NewDao()
+		svc.prefix = "svc"
 	}
 	return svc._dao
 }

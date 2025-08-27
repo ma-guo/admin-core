@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta http-equiv="x-dns-prefetch-control" content="on"/>
+    <style>
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        main :first-child {
+            margin-block-start: 0px;
+            margin-block-end: 0px;
+        }
+    </style>
+</head>
+<body style="padding: 0px; margin: 0px;">
+    <main id="main">{{html}}</main>
+</body>
+<script>
+    var main = document.getElementById('main');
+    main.innerHTML = main.innerText;
+</script>
+</html>

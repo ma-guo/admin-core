@@ -9,9 +9,9 @@ import (
 
 // v1 模块下的所有路由数组
 var RouteItems = []*niuhe.RouteItem{
-	{Method: "POST", Path: "/v1/auth/login", Name: "登录"},
-	{Method: "POST", Path: "/v1/auth/logout", Name: "登出"},
-	{Method: "GET", Path: "/v1/auth/captcha", Name: "获取验证码"},
+	{Method: "POST", Path: "/v1/auth/login/", Name: "登录"},
+	{Method: "POST", Path: "/v1/auth/logout/", Name: "登出"},
+	{Method: "GET", Path: "/v1/auth/captcha/", Name: "获取验证码"},
 	{Method: "GET", Path: "/v1/users/me/", Name: "获取当前登录用户信息"},
 	{Method: "GET", Path: "/v1/users/page/", Name: "用户分页列表"},
 	{Method: "POST", Path: "/v1/users/add/", Name: "新增用户"},
@@ -32,9 +32,9 @@ var RouteItems = []*niuhe.RouteItem{
 	{Method: "GET", Path: "/v1/roles/menuids/", Name: "获取角色的菜单ID集合"},
 	{Method: "POST", Path: "/v1/roles/menus/", Name: "分配菜单权限给角色"},
 	{Method: "POST", Path: "/v1/roles/status/", Name: "修改角色状态"},
-	{Method: "GET", Path: "v1/menus/list/", Name: "菜单列表"},
-	{Method: "POST", Path: "v1/menus/delete/", Name: "删除菜单"},
-	{Method: "POST", Path: "v1/menus/add/", Name: "新增菜单"},
+	{Method: "GET", Path: "/v1/menus/list/", Name: "菜单列表"},
+	{Method: "POST", Path: "/v1/menus/delete/", Name: "删除菜单"},
+	{Method: "POST", Path: "/v1/menus/add/", Name: "新增菜单"},
 	{Method: "GET", Path: "/v1/menus/options/", Name: "菜单下拉列表"},
 	{Method: "GET", Path: "/v1/menus/routes/", Name: "路由列表"},
 	{Method: "GET", Path: "/v1/menus/form/", Name: "菜单表单"},
@@ -73,4 +73,10 @@ var RouteItems = []*niuhe.RouteItem{
 	{Method: "GET", Path: "/v1/api/page/", Name: "API列表"},
 	{Method: "GET", Path: "/v1/api/form/", Name: "获取API详情值"},
 	{Method: "POST", Path: "/v1/api/update/", Name: "更新配置项"},
+	{Method: "GET", Path: "/v1/document/page/", Name: "分页查询获取内容管理信息"},
+	{Method: "GET", Path: "/v1/document/draft_page/", Name: "分页查询草稿信息"},
+	{Method: "GET", Path: "/v1/document/form/", Name: "查询获取内容管理信息"},
+	{Method: "POST", Path: "/v1/document/add/", Name: "添加内容管理信息"},
+	{Method: "POST", Path: "/v1/document/update/", Name: "更新内容管理信息"},
+	{Method: "DELETE", Path: "/v1/document/delete/", Name: "删除内容管理信息"},
 }

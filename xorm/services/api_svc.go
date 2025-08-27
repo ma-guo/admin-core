@@ -2,7 +2,6 @@ package services
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/ma-guo/admin-core/xorm/models"
 	"github.com/ma-guo/niuhe"
@@ -119,6 +118,6 @@ func (svc *_ApiSvc) GetMenus(method, path string) ([]*models.SysMenu, error) {
 		niuhe.LogInfo("%v", err)
 		return nil, err
 	}
-	svc.dao().SetCache(menus, 1*time.Minute, prefix, method, path)
+	svc.dao().SetCache(menus, prefix, method, path)
 	return menus, nil
 }

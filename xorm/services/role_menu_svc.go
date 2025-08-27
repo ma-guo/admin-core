@@ -2,7 +2,6 @@ package services
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/ma-guo/admin-core/xorm/models"
 
@@ -124,7 +123,7 @@ func (svc *_RoleMenuSvc) GetMenusByUid(uid int64) (map[int64]int64, error) {
 	for _, row := range roleMenus {
 		tmp[row.MenuId] = row.MenuId
 	}
-	svc.dao().SetCache(tmp, 5*time.Minute, prefix, uid)
+	svc.dao().SetCache(tmp, prefix, uid)
 
 	return tmp, nil
 }

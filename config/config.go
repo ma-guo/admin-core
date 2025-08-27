@@ -25,6 +25,7 @@ type AdminConfig struct {
 	// Filedir    string // 文件存储目录
 	Host       string // http + 域名
 	Fileprefix string // OSS文件前缀
+	Templates  string // 模板目录
 	Secretkey  string // bearer secret key
 	// TODO 在这下面添加其他配置内容
 }
