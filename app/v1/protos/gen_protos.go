@@ -64,7 +64,7 @@ type V1UserPageItem struct {
 	GenderLabel string `json:"genderLabel" zpf_name:"genderLabel" zpf_reqd:"true"` //	性别
 	Avatar      string `json:"avatar" zpf_name:"avatar" zpf_reqd:"true"`           //	头像地址
 	Email       string `json:"email" zpf_name:"email" zpf_reqd:"true"`             //	用户邮箱
-	Status      int    `json:"status" zpf_name:"status" zpf_reqd:"true"`           //	用户状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status      int    `json:"status" zpf_name:"status" zpf_reqd:"true"`           //	用户状态 取值范围及含义: 1 - 启用; 0 - 停用
 	DeptName    string `json:"deptName" zpf_name:"deptName" zpf_reqd:"true"`       //	部门名称
 	RoleNames   string `json:"roleNames" zpf_name:"roleNames" zpf_reqd:"true"`     //	角色名称
 	CreateTime  string `json:"createTime" zpf_name:"createTime" zpf_reqd:"true"`   //	创建时间
@@ -83,10 +83,10 @@ type V1UsersAddReq struct {
 	Nickname string  `json:"nickname" zpf_name:"nickname" zpf_reqd:"true"` //	用户昵称
 	Password string  `json:"password" zpf_name:"password"`                 //	密码
 	Mobile   string  `json:"mobile" zpf_name:"mobile"`                     //	手机号
-	Gender   int     `json:"gender" zpf_name:"gender"`                     //	性别 取值范围及含义: 0 - 未知; 1 - 男; 2 - 女;
+	Gender   int     `json:"gender" zpf_name:"gender"`                     //	性别 取值范围及含义: 0 - 未知; 1 - 男; 2 - 女
 	Avatar   string  `json:"avatar" zpf_name:"avatar"`                     //	头像地址
 	Email    string  `json:"email" zpf_name:"email"`                       //	用户邮箱
-	Status   int     `json:"status" zpf_name:"status"`                     //	用户状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status   int     `json:"status" zpf_name:"status"`                     //	用户状态 取值范围及含义: 1 - 启用; 0 - 停用
 	DeptId   int64   `json:"deptId" zpf_name:"deptId"`                     //	部门ID
 	RoleIds  []int64 `json:"roleIds" zpf_name:"roleIds"`                   //	角色ID集合
 }
@@ -102,10 +102,10 @@ type V1UserFormRsp struct {
 	Username string  `json:"username" zpf_name:"username" zpf_reqd:"true"` //	用户名
 	Nickname string  `json:"nickname" zpf_name:"nickname" zpf_reqd:"true"` //	用户昵称
 	Mobile   string  `json:"mobile" zpf_name:"mobile" zpf_reqd:"true"`     //	手机号
-	Gender   int     `json:"gender" zpf_name:"gender"`                     //	性别 取值范围及含义: 0 - 未知; 1 - 男; 2 - 女;
+	Gender   int     `json:"gender" zpf_name:"gender"`                     //	性别 取值范围及含义: 0 - 未知; 1 - 男; 2 - 女
 	Avatar   string  `json:"avatar" zpf_name:"avatar" zpf_reqd:"true"`     //	头像地址
 	Email    string  `json:"email" zpf_name:"email" zpf_reqd:"true"`       //	用户邮箱
-	Status   int     `json:"status" zpf_name:"status" zpf_reqd:"true"`     //	用户状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status   int     `json:"status" zpf_name:"status" zpf_reqd:"true"`     //	用户状态 取值范围及含义: 1 - 启用; 0 - 停用
 	DeptId   int64   `json:"deptId" zpf_name:"deptId" zpf_reqd:"true"`     //	部门ID
 	RoleIds  []int64 `json:"roleIds" zpf_name:"roleIds"`                   //	角色ID集合
 }
@@ -116,10 +116,10 @@ type V1UserUpdateReq struct {
 	Username string  `json:"username" zpf_name:"username" zpf_reqd:"true"` //	用户名
 	Nickname string  `json:"nickname" zpf_name:"nickname" zpf_reqd:"true"` //	用户昵称
 	Mobile   string  `json:"mobile" zpf_name:"mobile" zpf_reqd:"true"`     //	手机号
-	Gender   int     `json:"gender" zpf_name:"gender" zpf_reqd:"true"`     //	用户状态 取值范围及含义: 0 - 未知; 1 - 男; 2 - 女;
+	Gender   int     `json:"gender" zpf_name:"gender" zpf_reqd:"true"`     //	用户状态 取值范围及含义: 0 - 未知; 1 - 男; 2 - 女
 	Avatar   string  `json:"avatar" zpf_name:"avatar"`                     //	头像地址
 	Email    string  `json:"email" zpf_name:"email"`                       //	用户邮箱
-	Status   int     `json:"status" zpf_name:"status" zpf_reqd:"true"`     //	用户状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status   int     `json:"status" zpf_name:"status" zpf_reqd:"true"`     //	用户状态 取值范围及含义: 1 - 启用; 0 - 停用
 	DeptId   int64   `json:"deptId" zpf_name:"deptId" zpf_reqd:"true"`     //	部门ID
 	RoleIds  []int64 `json:"roleIds" zpf_name:"roleIds"`                   //	角色ID集合
 }
@@ -138,7 +138,7 @@ type V1UsersPasswordReq struct {
 // 修改用户状态请求参数
 type V1UsersStatusReq struct {
 	UserId int64 `json:"userId" zpf_name:"userId" zpf_reqd:"true"` //	用户ID
-	Status int   `json:"status" zpf_name:"status" zpf_reqd:"true"` //	用户状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status int   `json:"status" zpf_name:"status" zpf_reqd:"true"` //	用户状态 取值范围及含义: 1 - 启用; 0 - 停用
 }
 
 // 角色分页列表
@@ -153,7 +153,7 @@ type V1RolesItem struct {
 	Id         int64  `json:"id" zpf_name:"id" zpf_reqd:"true"`                 //	角色ID
 	Name       string `json:"name" zpf_name:"name" zpf_reqd:"true"`             //	角色名称
 	Code       string `json:"code" zpf_name:"code" zpf_reqd:"true"`             //	角色编码
-	Status     int    `json:"status" zpf_name:"status" zpf_reqd:"true"`         //	角色状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status     int    `json:"status" zpf_name:"status" zpf_reqd:"true"`         //	角色状态 取值范围及含义: 1 - 启用; 0 - 停用
 	Sort       int    `json:"sort" zpf_name:"sort" zpf_reqd:"true"`             //	排序
 	CreateTime string `json:"createTime" zpf_name:"createTime" zpf_reqd:"true"` //	创建时间
 	UpdateTime string `json:"updateTime" zpf_name:"updateTime" zpf_reqd:"true"` //	更新时间
@@ -179,9 +179,9 @@ type V1RolesAddReq struct {
 	Id        int64  `json:"id" zpf_name:"id"`                         //	角色ID
 	Name      string `json:"name" zpf_name:"name" zpf_reqd:"true"`     //	角色名称
 	Code      string `json:"code" zpf_name:"code" zpf_reqd:"true"`     //	角色编码
-	Status    int    `json:"status" zpf_name:"status" zpf_reqd:"true"` //	角色状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status    int    `json:"status" zpf_name:"status" zpf_reqd:"true"` //	角色状态 取值范围及含义: 1 - 启用; 0 - 停用
 	Sort      int    `json:"sort" zpf_name:"sort"`                     //	排序
-	DataScope int    `json:"dataScope" zpf_name:"dataScope"`           //	数据权限 取值范围及含义: 0 - 所有数据; 1 - 部门及子部门数据; 2 - 本部门数据; 3 - 本人数据;
+	DataScope int    `json:"dataScope" zpf_name:"dataScope"`           //	数据权限 取值范围及含义: 0 - 所有数据; 1 - 部门及子部门数据; 2 - 本部门数据; 3 - 本人数据
 }
 
 // 角色表单数据请求结构
@@ -194,9 +194,9 @@ type V1RolesFormRsp struct {
 	Id        int64  `json:"id" zpf_name:"id"`                         //	角色ID
 	Name      string `json:"name" zpf_name:"name" zpf_reqd:"true"`     //	角色名称
 	Code      string `json:"code" zpf_name:"code" zpf_reqd:"true"`     //	角色编码
-	Status    int    `json:"status" zpf_name:"status" zpf_reqd:"true"` //	角色状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status    int    `json:"status" zpf_name:"status" zpf_reqd:"true"` //	角色状态 取值范围及含义: 1 - 启用; 0 - 停用
 	Sort      int    `json:"sort" zpf_name:"sort"`                     //	排序
-	DataScope int    `json:"dataScope" zpf_name:"dataScope"`           //	数据权限 取值范围及含义: 0 - 所有数据; 1 - 部门及子部门数据; 2 - 本部门数据; 3 - 本人数据;
+	DataScope int    `json:"dataScope" zpf_name:"dataScope"`           //	数据权限 取值范围及含义: 0 - 所有数据; 1 - 部门及子部门数据; 2 - 本部门数据; 3 - 本人数据
 }
 
 // 角色表单数据
@@ -204,9 +204,9 @@ type V1RolesUpdateReq struct {
 	Id        int64  `json:"id" zpf_name:"id" zpf_reqd:"true"`         //	角色ID
 	Name      string `json:"name" zpf_name:"name" zpf_reqd:"true"`     //	角色名称
 	Code      string `json:"code" zpf_name:"code" zpf_reqd:"true"`     //	角色编码
-	Status    int    `json:"status" zpf_name:"status" zpf_reqd:"true"` //	角色状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status    int    `json:"status" zpf_name:"status" zpf_reqd:"true"` //	角色状态 取值范围及含义: 1 - 启用; 0 - 停用
 	Sort      int    `json:"sort" zpf_name:"sort"`                     //	排序
-	DataScope int    `json:"dataScope" zpf_name:"dataScope"`           //	数据权限 取值范围及含义: 0 - 所有数据; 1 - 部门及子部门数据; 2 - 本部门数据; 3 - 本人数据;
+	DataScope int    `json:"dataScope" zpf_name:"dataScope"`           //	数据权限 取值范围及含义: 0 - 所有数据; 1 - 部门及子部门数据; 2 - 本部门数据; 3 - 本人数据
 }
 
 // 角色删除
@@ -233,14 +233,14 @@ type V1RolesMenusReq struct {
 // 修改角色状态
 type V1RolesStatusReq struct {
 	RoleId int64 `json:"roleId" zpf_name:"roleId" zpf_reqd:"true"` //	角色ID
-	Status int   `json:"status" zpf_name:"status" zpf_reqd:"true"` //	角色状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status int   `json:"status" zpf_name:"status" zpf_reqd:"true"` //	角色状态 取值范围及含义: 1 - 启用; 0 - 停用
 }
 
 // 菜单列表请求
 type V1MenusListReq struct {
 	Keywords string `json:"keywords" zpf_name:"keywords"` //	关键字
-	Status   int    `json:"status" zpf_name:"status"`     //	状态 取值范围及含义: 1 - 显示; 0 - 隐藏;
-	Type     int    `json:"type" zpf_name:"type"`         //	菜单类型, 忽略本参数 取值范围及含义: 1 - MENU; 2 - CATALOG; 3 - EXTLINK; 4 - BUTTON;
+	Status   int    `json:"status" zpf_name:"status"`     //	状态 取值范围及含义: 1 - 显示; 0 - 隐藏
+	Type     int    `json:"type" zpf_name:"type"`         //	菜单类型, 忽略本参数 取值范围及含义: 1 - MENU; 2 - CATALOG; 3 - EXTLINK; 4 - BUTTON
 }
 
 // 菜单视图对象
@@ -253,9 +253,9 @@ type MenuItem struct {
 	RouteName string      `json:"routeName" zpf_name:"routeName"`       //	路由名称
 	Component string      `json:"component" zpf_name:"component"`       //	组件路径
 	Sort      int         `json:"sort" zpf_name:"sort"`                 //	菜单排序(数字越小排名越靠前)
-	Visible   int         `json:"visible" zpf_name:"visible"`           //	是否可见 取值范围及含义: 1 - 显示; 0 - 隐藏;
+	Visible   int         `json:"visible" zpf_name:"visible"`           //	是否可见 取值范围及含义: 1 - 显示; 0 - 隐藏
 	Redirect  string      `json:"redirect" zpf_name:"redirect"`         //	跳转路径
-	Type      string      `json:"type" zpf_name:"type"`                 //	菜单类型 取值范围及含义: NULL - 无类型; CATALOG - 目录; MENU - 菜单; BUTTON - 按钮; EXTLINK - 外链;
+	Type      string      `json:"type" zpf_name:"type"`                 //	菜单类型 取值范围及含义: NULL - 无类型; CATALOG - 目录; MENU - 菜单; BUTTON - 按钮; EXTLINK - 外链
 	Perm      string      `json:"perm" zpf_name:"perm"`                 //	按钮权限标识
 	Children  []*MenuItem `json:"children" zpf_name:"children"`         //	子菜单
 }
@@ -275,11 +275,11 @@ type V1MenusAddReq struct {
 	Id         int64  `json:"id" zpf_name:"id"`                     //	菜单ID
 	ParentId   int64  `json:"parentId" zpf_name:"parentId"`         //	父菜单ID
 	Name       string `json:"name" zpf_name:"name" zpf_reqd:"true"` //	菜单名称
-	Type       string `json:"type" zpf_name:"type"`                 //	菜单类型 取值范围及含义: NULL - 无类型; CATALOG - 目录; MENU - 菜单; BUTTON - 按钮; EXTLINK - 外链;
+	Type       string `json:"type" zpf_name:"type"`                 //	菜单类型 取值范围及含义: NULL - 无类型; CATALOG - 目录; MENU - 菜单; BUTTON - 按钮; EXTLINK - 外链
 	Path       string `json:"path" zpf_name:"path"`                 //	路由路径
 	Component  string `json:"component" zpf_name:"component"`       //	组件路径(vue页面完整路径，省略.vue后缀)
 	Perm       string `json:"perm" zpf_name:"perm"`                 //	权限标识
-	Visible    int    `json:"visible" zpf_name:"visible"`           //	显示状态 取值范围及含义: 1 - 显示; 0 - 隐藏;
+	Visible    int    `json:"visible" zpf_name:"visible"`           //	显示状态 取值范围及含义: 1 - 显示; 0 - 隐藏
 	Sort       int    `json:"sort" zpf_name:"sort"`                 //	排序(数字越小排名越靠前)
 	Icon       string `json:"icon" zpf_name:"icon"`                 //	菜单图标
 	Redirect   string `json:"redirect" zpf_name:"redirect"`         //	跳转路径
@@ -330,11 +330,11 @@ type V1MenusFormRsp struct {
 	Id         int64  `json:"id" zpf_name:"id"`                     //	菜单ID
 	ParentId   int64  `json:"parentId" zpf_name:"parentId"`         //	父菜单ID
 	Name       string `json:"name" zpf_name:"name" zpf_reqd:"true"` //	菜单名称
-	Type       string `json:"type" zpf_name:"type"`                 //	菜单类型 取值范围及含义: NULL - 无类型; CATALOG - 目录; MENU - 菜单; BUTTON - 按钮; EXTLINK - 外链;
+	Type       string `json:"type" zpf_name:"type"`                 //	菜单类型 取值范围及含义: NULL - 无类型; CATALOG - 目录; MENU - 菜单; BUTTON - 按钮; EXTLINK - 外链
 	Path       string `json:"path" zpf_name:"path"`                 //	路由路径
 	Component  string `json:"component" zpf_name:"component"`       //	组件路径(vue页面完整路径，省略.vue后缀)
 	Perm       string `json:"perm" zpf_name:"perm"`                 //	权限标识
-	Visible    int    `json:"visible" zpf_name:"visible"`           //	显示状态 取值范围及含义: 1 - 显示; 0 - 隐藏;
+	Visible    int    `json:"visible" zpf_name:"visible"`           //	显示状态 取值范围及含义: 1 - 显示; 0 - 隐藏
 	Sort       int    `json:"sort" zpf_name:"sort"`                 //	排序(数字越小排名越靠前)
 	Icon       string `json:"icon" zpf_name:"icon"`                 //	菜单图标
 	Redirect   string `json:"redirect" zpf_name:"redirect"`         //	跳转路径
@@ -347,11 +347,11 @@ type V1MenusUpdateReq struct {
 	Id         int64  `json:"id" zpf_name:"id" zpf_reqd:"true"`     //	菜单ID
 	ParentId   int64  `json:"parentId" zpf_name:"parentId"`         //	父菜单ID
 	Name       string `json:"name" zpf_name:"name" zpf_reqd:"true"` //	菜单名称
-	Type       string `json:"type" zpf_name:"type"`                 //	菜单类型 取值范围及含义: NULL - 无类型; CATALOG - 目录; MENU - 菜单; BUTTON - 按钮; EXTLINK - 外链;
+	Type       string `json:"type" zpf_name:"type"`                 //	菜单类型 取值范围及含义: NULL - 无类型; CATALOG - 目录; MENU - 菜单; BUTTON - 按钮; EXTLINK - 外链
 	Path       string `json:"path" zpf_name:"path"`                 //	路由路径
 	Component  string `json:"component" zpf_name:"component"`       //	组件路径(vue页面完整路径，省略.vue后缀)
 	Perm       string `json:"perm" zpf_name:"perm"`                 //	权限标识
-	Visible    int    `json:"visible" zpf_name:"visible"`           //	显示状态 取值范围及含义: 1 - 显示; 0 - 隐藏;
+	Visible    int    `json:"visible" zpf_name:"visible"`           //	显示状态 取值范围及含义: 1 - 显示; 0 - 隐藏
 	Sort       int    `json:"sort" zpf_name:"sort"`                 //	排序(数字越小排名越靠前)
 	Icon       string `json:"icon" zpf_name:"icon"`                 //	菜单图标
 	Redirect   string `json:"redirect" zpf_name:"redirect"`         //	跳转路径
@@ -362,13 +362,13 @@ type V1MenusUpdateReq struct {
 // 修改菜单状态请求参数
 type V1MenusStatusReq struct {
 	Id      int64 `json:"id" zpf_name:"id" zpf_reqd:"true"`           //	菜单ID
-	Visible int   `json:"visible" zpf_name:"visible" zpf_reqd:"true"` //	菜单状态 取值范围及含义: 1 - 显示; 0 - 隐藏;
+	Visible int   `json:"visible" zpf_name:"visible" zpf_reqd:"true"` //	菜单状态 取值范围及含义: 1 - 显示; 0 - 隐藏
 }
 
 // 菜单列表请求
 type V1MenusPageReq struct {
 	Keywords string `json:"keywords" zpf_name:"keywords"` //	关键字
-	Type     int    `json:"type" zpf_name:"type"`         //	菜单类型, 忽略本参数 取值范围及含义: 1 - MENU; 2 - CATALOG; 3 - EXTLINK; 4 - BUTTON;
+	Type     int    `json:"type" zpf_name:"type"`         //	菜单类型, 忽略本参数 取值范围及含义: 1 - MENU; 2 - CATALOG; 3 - EXTLINK; 4 - BUTTON
 	PageNum  int    `json:"pageNum" zpf_name:"pageNum"`   //	页码
 	PageSize int    `json:"pageSize" zpf_name:"pageSize"` //	每页记录数
 }
@@ -389,7 +389,7 @@ type V1MenusPageRsp struct {
 // 部门列表请求
 type V1DeptListReq struct {
 	Keyword string `json:"keyword" zpf_name:"keyword"` //	搜索关键词
-	Status  int    `json:"status" zpf_name:"status"`   //	状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status  int    `json:"status" zpf_name:"status"`   //	状态 取值范围及含义: 1 - 启用; 0 - 停用
 }
 
 // 部门信息
@@ -398,7 +398,7 @@ type V1DeptItem struct {
 	ParentId   int64         `json:"parentId" zpf_name:"parentId"`         //	父部门id
 	Name       string        `json:"name" zpf_name:"name" zpf_reqd:"true"` //	部门名称
 	Sort       int           `json:"sort" zpf_name:"sort"`                 //	排序
-	Status     int           `json:"status" zpf_name:"status"`             //	状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status     int           `json:"status" zpf_name:"status"`             //	状态 取值范围及含义: 1 - 启用; 0 - 停用
 	CreateTime string        `json:"createTime" zpf_name:"createTime"`     //	创建时间
 	UpdateTime string        `json:"updateTime" zpf_name:"updateTime"`     //	修改时间
 	Children   []*V1DeptItem `json:"children" zpf_name:"children"`         //	子部门
@@ -415,7 +415,7 @@ type V1DeptAddReq struct {
 	ParentId int64  `json:"parentId" zpf_name:"parentId" zpf_reqd:"true"` //	父部门id
 	Name     string `json:"name" zpf_name:"name" zpf_reqd:"true"`         //	部门名称
 	Sort     int    `json:"sort" zpf_name:"sort"`                         //	排序
-	Status   int    `json:"status" zpf_name:"status"`                     //	状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status   int    `json:"status" zpf_name:"status"`                     //	状态 取值范围及含义: 1 - 启用; 0 - 停用
 }
 
 type LongOptions struct {
@@ -435,7 +435,7 @@ type V1DeptUpdateReq struct {
 	ParentId int64  `json:"parentId" zpf_name:"parentId" zpf_reqd:"true"` //	父部门id
 	Name     string `json:"name" zpf_name:"name" zpf_reqd:"true"`         //	部门名称
 	Sort     int    `json:"sort" zpf_name:"sort"`                         //	排序
-	Status   int    `json:"status" zpf_name:"status"`                     //	状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status   int    `json:"status" zpf_name:"status"`                     //	状态 取值范围及含义: 1 - 启用; 0 - 停用
 }
 
 // 获取部门表单数据请求参数
@@ -449,7 +449,7 @@ type V1DeptFormRsp struct {
 	ParentId int64  `json:"parentId" zpf_name:"parentId" zpf_reqd:"true"` //	父部门id
 	Name     string `json:"name" zpf_name:"name" zpf_reqd:"true"`         //	部门名称
 	Sort     int    `json:"sort" zpf_name:"sort"`                         //	排序
-	Status   int    `json:"status" zpf_name:"status"`                     //	状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status   int    `json:"status" zpf_name:"status"`                     //	状态 取值范围及含义: 1 - 启用; 0 - 停用
 }
 
 // 删除部门请求参数
@@ -469,7 +469,7 @@ type V1DictItem struct {
 	Name   string `json:"name" zpf_name:"name"`     //	字典名称
 	Value  string `json:"value" zpf_name:"value"`   //	字典值
 	Remark string `json:"remark" zpf_name:"remark"` //	备注
-	Status int    `json:"status" zpf_name:"status"` //	状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status int    `json:"status" zpf_name:"status"` //	状态 取值范围及含义: 1 - 启用; 0 - 停用
 }
 
 type V1DictPageRsp struct {
@@ -500,7 +500,7 @@ type V1DictFormRsp struct {
 	TypeCode string `json:"typeCode" zpf_name:"typeCode" zpf_reqd:"true"` //	类型编码
 	Name     string `json:"name" zpf_name:"name"`                         //	字典名称
 	Value    string `json:"value" zpf_name:"value"`                       //	字典值
-	Status   int    `json:"status" zpf_name:"status"`                     //	状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status   int    `json:"status" zpf_name:"status"`                     //	状态 取值范围及含义: 1 - 启用; 0 - 停用
 	Sort     int    `json:"sort" zpf_name:"sort"`                         //	排序
 	Remark   string `json:"remark" zpf_name:"remark"`                     //	备注
 }
@@ -510,7 +510,7 @@ type V1DictAddReq struct {
 	TypeCode string `json:"typeCode" zpf_name:"typeCode" zpf_reqd:"true"` //	类型编码
 	Name     string `json:"name" zpf_name:"name"`                         //	字典名称
 	Value    string `json:"value" zpf_name:"value"`                       //	字典值
-	Status   int    `json:"status" zpf_name:"status"`                     //	状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status   int    `json:"status" zpf_name:"status"`                     //	状态 取值范围及含义: 1 - 启用; 0 - 停用
 	Sort     int    `json:"sort" zpf_name:"sort"`                         //	排序
 	Remark   string `json:"remark" zpf_name:"remark"`                     //	备注
 }
@@ -520,7 +520,7 @@ type V1DictUpdateReq struct {
 	TypeCode string `json:"typeCode" zpf_name:"typeCode"`     //	类型编码
 	Name     string `json:"name" zpf_name:"name"`             //	字典名称
 	Value    string `json:"value" zpf_name:"value"`           //	字典值
-	Status   int    `json:"status" zpf_name:"status"`         //	状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status   int    `json:"status" zpf_name:"status"`         //	状态 取值范围及含义: 1 - 启用; 0 - 停用
 	Sort     int    `json:"sort" zpf_name:"sort"`             //	排序
 	Remark   string `json:"remark" zpf_name:"remark"`         //	备注
 }
@@ -540,7 +540,7 @@ type V1DictTypesItem struct {
 	Name   string `json:"name" zpf_name:"name"`     //	类型名称
 	Code   string `json:"code" zpf_name:"code"`     //	类型编码
 	Remark string `json:"remark" zpf_name:"remark"` //	备注
-	Status int    `json:"status" zpf_name:"status"` //	状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status int    `json:"status" zpf_name:"status"` //	状态 取值范围及含义: 1 - 启用; 0 - 停用
 }
 
 type V1DictTypesPageRsp struct {
@@ -556,7 +556,7 @@ type V1DictTypesFormRsp struct {
 	Id     int64  `json:"id" zpf_name:"id"`         //	主键
 	Name   string `json:"name" zpf_name:"name"`     //	类型名称
 	Code   string `json:"code" zpf_name:"code"`     //	类型编码
-	Status int    `json:"status" zpf_name:"status"` //	状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status int    `json:"status" zpf_name:"status"` //	状态 取值范围及含义: 1 - 启用; 0 - 停用
 	Remark string `json:"remark" zpf_name:"remark"` //	备注
 }
 
@@ -564,7 +564,7 @@ type V1DictTypesAddReq struct {
 	Id     int64  `json:"id" zpf_name:"id"`                     //	主键
 	Name   string `json:"name" zpf_name:"name"`                 //	类型名称
 	Code   string `json:"code" zpf_name:"code" zpf_reqd:"true"` //	类型编码-必填
-	Status int    `json:"status" zpf_name:"status"`             //	状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status int    `json:"status" zpf_name:"status"`             //	状态 取值范围及含义: 1 - 启用; 0 - 停用
 	Remark string `json:"remark" zpf_name:"remark"`             //	备注
 }
 
@@ -572,7 +572,7 @@ type V1DictTypesUpdateReq struct {
 	Id     int64  `json:"id" zpf_name:"id" zpf_reqd:"true"`     //	主键
 	Name   string `json:"name" zpf_name:"name"`                 //	类型名称
 	Code   string `json:"code" zpf_name:"code" zpf_reqd:"true"` //	类型编码
-	Status int    `json:"status" zpf_name:"status"`             //	状态 取值范围及含义: 1 - 启用; 0 - 停用;
+	Status int    `json:"status" zpf_name:"status"`             //	状态 取值范围及含义: 1 - 启用; 0 - 停用
 	Remark string `json:"remark" zpf_name:"remark"`             //	备注
 }
 
@@ -609,7 +609,7 @@ type V1FileItem struct {
 	Name       string `json:"name" zpf_name:"name" zpf_reqd:"true"` //	文件名
 	Url        string `json:"url" zpf_name:"url" zpf_reqd:"true"`   //	文件URL
 	Key        string `json:"key" zpf_name:"key"`                   //	文件key
-	Vendor     string `json:"vendor" zpf_name:"vendor"`             //	菜单类型 取值范围及含义: local - 本机存储; qiniu - 七牛存储; aliyun - 阿里云存储; tencent - 腾讯云存储;
+	Vendor     string `json:"vendor" zpf_name:"vendor"`             //	菜单类型 取值范围及含义: local - 本机存储; qiniu - 七牛存储; aliyun - 阿里云存储; tencent - 腾讯云存储
 	CreateTime string `json:"createTime" zpf_name:"createTime"`     //	创建时间
 	Deleted    bool   `json:"deleted" zpf_name:"deleted"`           //	是否删除
 	VendorName string `json:"vendorName" zpf_name:"vendorName"`     //	文件存储提供商
@@ -631,7 +631,7 @@ type V1FileFromRsp struct {
 	Name       string `json:"name" zpf_name:"name" zpf_reqd:"true"`             //	文件名
 	Url        string `json:"url" zpf_name:"url" zpf_reqd:"true"`               //	文件URL
 	Key        string `json:"key" zpf_name:"key"`                               //	文件key
-	Vendor     string `json:"vendor" zpf_name:"vendor"`                         //	菜单类型 取值范围及含义: local - 本机存储; qiniu - 七牛存储; aliyun - 阿里云存储; tencent - 腾讯云存储;
+	Vendor     string `json:"vendor" zpf_name:"vendor"`                         //	菜单类型 取值范围及含义: local - 本机存储; qiniu - 七牛存储; aliyun - 阿里云存储; tencent - 腾讯云存储
 	Deleted    bool   `json:"deleted" zpf_name:"deleted"`                       //	是否删除
 	VendorName string `json:"vendorName" zpf_name:"vendorName"`                 //	文件存储提供商
 	CreateTime string `json:"createTime" zpf_name:"createTime" zpf_reqd:"true"` //	创建时间
@@ -746,9 +746,10 @@ type V1ApiUpdateReq struct {
 
 // 分页查询内容管理信息
 type DocumentPageReq struct {
-	Page int    `json:"page" zpf_name:"page" zpf_reqd:"true" zpf_minnum:"1"`  //	页码 最小值:1
-	Size int    `json:"size" zpf_name:"size" zpf_reqd:"true" zpf_num:"1 200"` //	每页数量 数值范围:1-200
-	Name string `json:"name" zpf_name:"name"`                                 //	名称
+	Page   int    `json:"page" zpf_name:"page" zpf_reqd:"true" zpf_minnum:"1"`  //	页码 最小值:1
+	Editor string `json:"editor" zpf_name:"editor" zpf_reqd:"true"`             //	编辑器
+	Size   int    `json:"size" zpf_name:"size" zpf_reqd:"true" zpf_num:"1 200"` //	每页数量 数值范围:1-200
+	Name   string `json:"name" zpf_name:"name"`                                 //	名称
 }
 
 // 文章-内容管理
@@ -759,6 +760,7 @@ type DocumentItem struct {
 	Html     string `json:"html" zpf_name:"html" zpf_reqd:"true"`         //	html内容
 	Version  int    `json:"version" zpf_name:"version"`                   //	版本
 	Url      string `json:"url" zpf_name:"url"`                           //	url
+	Editor   string `json:"editor" zpf_name:"editor" zpf_reqd:"true"`     //	编辑器
 	CreateAt string `json:"create_at" zpf_name:"create_at"`               //	创建时间
 	UpdateAt string `json:"update_at" zpf_name:"update_at"`               //	更新时间
 }

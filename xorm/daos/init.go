@@ -173,7 +173,7 @@ func (dao *Dao) Delete(ids []int64, row any) (bool, error) {
 		niuhe.LogInfo("begin error %v", err)
 		return false, err
 	}
-	affected, err := session.Where("`id`", ids).Delete(row)
+	affected, err := session.In("`id`", ids).Delete(row)
 	if err != nil {
 		session.Rollback()
 		return false, err

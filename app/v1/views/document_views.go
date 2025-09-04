@@ -19,7 +19,7 @@ type Document struct {
 func (v *Document) Page_GET(c *niuhe.Context, req *protos.DocumentPageReq, rsp *protos.DocumentPageRsp) error {
 	svc := services.NewSvc()
 	defer svc.Close()
-	rows, total, err := svc.SysDocument().GetPage(req.Page, req.Size, req.Name)
+	rows, total, err := svc.SysDocument().GetPage(req.Page, req.Size, req.Name, req.Editor)
 	if err != nil {
 		niuhe.LogInfo("%v", err)
 		return err
@@ -86,6 +86,7 @@ func (v *Document) Add_POST(c *niuhe.Context, req *protos.DocumentItem, rsp *pro
 		Name:     req.Name,
 		Markdown: req.Markdown,
 		Html:     req.Html,
+		Editor:   req.Editor,
 	}
 	err := svc.SysDocument().Insert(row)
 	if err != nil {

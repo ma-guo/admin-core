@@ -173,8 +173,8 @@ func (svc *_SysDocsSvc) GetByIds(ids ...int64) (map[int64]*models.SysDocument, e
 }
 
 // 分页获取数据
-func (svc *_SysDocsSvc) GetPage(page, size int, name string) ([]*models.SysDocument, int64, error) {
-	rows, total, err := svc.dao().SysDocument().GetPage(page, size, name)
+func (svc *_SysDocsSvc) GetPage(page, size int, name, editor string) ([]*models.SysDocument, int64, error) {
+	rows, total, err := svc.dao().SysDocument().GetPage(page, size, name, editor)
 	if err != nil {
 		niuhe.LogInfo("GetPage SysDocument error: %v", err)
 	}

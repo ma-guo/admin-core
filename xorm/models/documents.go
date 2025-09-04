@@ -15,23 +15,25 @@ import (
 // 文章-内容管理
 type SysDocument struct {
 	Id       int64     `xorm:"NOT NULL PK AUTOINCR INT(11)"`
-	Name     string    `xorm:"VARCHAR(255) COMMENT('名称')"` // 名称
-	Markdown string    `xorm:"TEXT COMMENT('markdown内容')"` // markdown内容
-	Html     string    `xorm:"TEXT COMMENT('html内容')"`     // html内容
-	CreateAt time.Time `xorm:"created"`                    // 创建时间
-	UpdateAt time.Time `xorm:"updated"`                    // 更新时间
-	DeleteAt time.Time `xorm:"deleted"`                    // 删除时间
+	Name     string    `xorm:"VARCHAR(255) COMMENT('名称')"`                     // 名称
+	Markdown string    `xorm:"TEXT COMMENT('markdown内容')"`                     // markdown内容
+	Html     string    `xorm:"TEXT COMMENT('html内容')"`                         // html内容
+	Version  int       `xorm:"version INT(11) DEFAULT(1) COMMENT('版本号')"`      // 版本号
+	Editor   string    `xorm:"VARCHAR(12) DEFAULT('markdown') COMMENT('编辑器')"` // 编辑器
+	CreateAt time.Time `xorm:"created"`                                        // 创建时间
+	UpdateAt time.Time `xorm:"updated"`                                        // 更新时间
+	DeleteAt time.Time `xorm:"deleted"`                                        // 删除时间
 }
 
 type SysDraft struct {
 	Id       int64     `xorm:"NOT NULL PK AUTOINCR INT(11)"`
-	DocId    int64     `xorm:"INT(11) COMMENT('文章id')"`    // 文章id
-	Name     string    `xorm:"VARCHAR(255) COMMENT('名称')"` // 名称
-	Markdown string    `xorm:"TEXT COMMENT('markdown内容')"` // markdown内容
-	Version  int       `xorm:"INT(11) COMMENT('版本号')"`     // 版本号
-	CreateAt time.Time `xorm:"created"`                    // 创建时间
-	UpdateAt time.Time `xorm:"updated"`                    // 更新时间
-	DeleteAt time.Time `xorm:"deleted"`                    // 删除时间
+	DocId    int64     `xorm:"INT(11) COMMENT('文章id')"`         // 文章id
+	Name     string    `xorm:"VARCHAR(255) COMMENT('名称')"`      // 名称
+	Markdown string    `xorm:"TEXT COMMENT('markdown内容')"`      // markdown内容
+	Version  int       `xorm:"version INT(11)  COMMENT('版本号')"` // 版本号
+	CreateAt time.Time `xorm:"created"`                         // 创建时间
+	UpdateAt time.Time `xorm:"updated"`                         // 更新时间
+	DeleteAt time.Time `xorm:"deleted"`                         // 删除时间
 }
 
 func (row *SysDocument) ToProto(item *protos.DocumentItem, host string) *protos.DocumentItem {
@@ -42,6 +44,8 @@ func (row *SysDocument) ToProto(item *protos.DocumentItem, host string) *protos.
 	item.Name = row.Name
 	item.Markdown = row.Markdown
 	item.Html = row.Html
+	item.Version = row.Version
+	item.Editor = row.Editor
 	item.Url = buildDocumentUrl(host, row.Id)
 	item.CreateAt = row.CreateAt.Format(time.DateTime)
 	item.UpdateAt = row.UpdateAt.Format(time.DateTime)

@@ -30,9 +30,9 @@ func (dao *_SysDocumentDao) GetByIds(ids ...int64) ([]*models.SysDocument, error
 }
 
 // 分页获取数据
-func (dao *_SysDocumentDao) GetPage(page, size int, name string) ([]*models.SysDocument, int64, error) {
+func (dao *_SysDocumentDao) GetPage(page, size int, name, editor string) ([]*models.SysDocument, int64, error) {
 	rows := make([]*models.SysDocument, 0)
-	session := dao.db()
+	session := dao.db().Where("`editor` = ?", editor)
 	dao.Like(session, "`name`", name)
 	dao.Limit(session, page, size)
 	total, err := session.Desc("`id`").FindAndCount(&rows)
@@ -72,6 +72,6 @@ func (dao *_SysDocumentDao) GetDraftPage(docId int64, page, size int) ([]*models
 
 // 删除草稿
 func (dao *_SysDocumentDao) DeleteDraft(docIds ...int64) error {
-	_, err := dao.db().Where("`doc_id` in (?)", docIds).Delete(&models.SysDraft{})
+	_, err := dao.db().In("`doc_id`", docIds).Delete(&models.SysDraft{})
 	return err
 }
