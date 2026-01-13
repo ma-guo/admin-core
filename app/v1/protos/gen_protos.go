@@ -582,8 +582,9 @@ type V1DictTypesDeleteReq struct {
 
 // 文件上传请求
 type V1FilesUploadRsp struct {
-	Name string `json:"name" zpf_name:"name"` //	文件名
-	Url  string `json:"url" zpf_name:"url"`   //	文件URL
+	Name      string `json:"name" zpf_name:"name"`             //	文件名
+	Url       string `json:"url" zpf_name:"url"`               //	文件URL
+	SignedUrl string `json:"signed_url" zpf_name:"signed_url"` //	签名后的URL
 }
 
 // 文件删除请求

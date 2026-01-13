@@ -2,6 +2,7 @@ package aliyunoss
 
 import (
 	"fmt"
+	"net/url"
 	"strings"
 	"time"
 
@@ -82,27 +83,21 @@ func (ali *Aliyun) SignUrl(fileUrl string, expires time.Duration) string {
 	if tmpSign, has := localCache.Get(fileUrl); has {
 		return tmpSign.(string)
 	}
-	accessKeyID := ali.AccessKeyId
-	accessKeySecret := ali.AccessKeySecret
-	endpoint := ali.Endpoint
-	bucketName := ali.Buncket
-	prefix := fmt.Sprintf("%s/%s/", endpoint, bucketName)
+	prefix := fmt.Sprintf("https://%v.%s/", ali.Buncket, ali.Endpoint)
 	objectKey := fileUrl[len(prefix):]
 
 	// 创建 OSS 客户端
-	client, err := oss.New(endpoint, accessKeyID, accessKeySecret)
+	client, err := oss.New(ali.Endpoint, ali.AccessKeyId, ali.AccessKeySecret)
 	if err != nil {
 		niuhe.LogInfo("%v", err)
 		return fileUrl
 	}
 
 	// 获取 Bucket
-	bucket, err := client.Bucket(bucketName)
+	bucket, err := client.Bucket(ali.Buncket)
 	if err != nil {
-		if err != nil {
-			niuhe.LogInfo("%v", err)
-			return fileUrl
-		}
+		niuhe.LogInfo("%v", err)
+		return fileUrl
 	}
 
 	// 生成签名 URL（用于 GET 下载）
@@ -111,9 +106,19 @@ func (ali *Aliyun) SignUrl(fileUrl string, expires time.Duration) string {
 		niuhe.LogInfo("%v", err)
 		return fileUrl
 	}
-	fmt.Println(signedURL)
-	localCache.Set(fileUrl, signedURL, expires)
-	return signedURL
+	// signUrl 需要做 decodeURIComponent 操作
+	decoded := ali.decodeURIComponent(signedURL)
+	// niuhe.LogInfo("SignUrl: %s\n%v\n%v\n%v\n%v", decoded, prefix, objectKey, fileUrl, signedURL)
+	localCache.Set(fileUrl, decoded, expires)
+	return decoded
+}
+func (ali *Aliyun) decodeURIComponent(signedURL string) string {
+	decoded, err := url.QueryUnescape(signedURL)
+	if err != nil {
+		niuhe.LogInfo("%v", err)
+		return signedURL
+	}
+	return decoded
 }
 
 func init() {

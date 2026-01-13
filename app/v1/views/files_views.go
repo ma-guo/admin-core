@@ -108,6 +108,11 @@ func (v *Files) Upload_POST(c *niuhe.Context, req *protos.NoneReq, rsp *protos.V
 			return err
 		}
 		rsp.Url = ossUrl
+		aliyun := aliyunoss.NewAliyun()
+		rsp.SignedUrl = aliyun.SignUrl(ossUrl, time.Hour*24)
+		if aliyun != nil {
+			rsp.SignedUrl = aliyun.SignUrl(ossUrl, time.Hour)
+		}
 		err = actionSaveToDb(ossUrl, key)
 		if err != nil {
 			niuhe.LogInfo("%v", err)
