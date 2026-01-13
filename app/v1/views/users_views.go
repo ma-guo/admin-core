@@ -11,6 +11,7 @@ import (
 	"github.com/ma-guo/admin-core/app/common/consts"
 	"github.com/ma-guo/admin-core/app/v1/protos"
 	"github.com/ma-guo/admin-core/utils"
+	"github.com/ma-guo/admin-core/utils/aliyunoss"
 	"github.com/ma-guo/admin-core/utils/password"
 	"github.com/ma-guo/admin-core/xorm/models"
 	"github.com/ma-guo/admin-core/xorm/services"
@@ -42,8 +43,10 @@ func (v *Users) Me_GET(c *niuhe.Context, req *protos.NoneReq, rsp *protos.V1User
 	if user.Deleted {
 		return niuhe.NewCommError(consts.AuthError, "账号已被禁用")
 	}
+	aliyun := aliyunoss.NewAliyun()
+
 	rsp.UserId = user.Id
-	rsp.Avatar = user.Avatar
+	rsp.Avatar = aliyun.SignUrl(user.Avatar, time.Hour*1)
 	rsp.Username = user.Username
 	rsp.Nickname = user.Nickname
 	roles, err := svc.Role().GetByUserId(user.Id)
@@ -105,6 +108,7 @@ func (v *Users) Page_GET(c *niuhe.Context, req *protos.V1UsersPageReq, rsp *prot
 		niuhe.LogInfo("%v", err)
 		return err
 	}
+	aliyun := aliyunoss.NewAliyun()
 	for _, user := range users {
 		item := &protos.V1UserPageItem{
 			Id:          user.Id,
@@ -112,7 +116,7 @@ func (v *Users) Page_GET(c *niuhe.Context, req *protos.V1UsersPageReq, rsp *prot
 			Nickname:    user.Nickname,
 			Mobile:      user.Mobile,
 			GenderLabel: user.GenderLabel(),
-			Avatar:      user.Avatar,
+			Avatar:      aliyun.SignUrl(user.Avatar, time.Hour*1),
 			Email:       user.Email,
 			Status:      user.IntStatus(),
 			DeptName:    "",

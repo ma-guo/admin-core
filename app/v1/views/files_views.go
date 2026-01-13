@@ -10,6 +10,7 @@ import (
 	"github.com/ma-guo/admin-core/app/common/consts"
 	"github.com/ma-guo/admin-core/app/v1/protos"
 	"github.com/ma-guo/admin-core/utils"
+	"github.com/ma-guo/admin-core/utils/aliyunoss"
 	"github.com/ma-guo/admin-core/utils/bearer"
 	"github.com/ma-guo/admin-core/utils/fileupload"
 	"github.com/ma-guo/admin-core/xorm/models"
@@ -207,13 +208,14 @@ func (v *Files) Page_GET(c *niuhe.Context, req *protos.V1FilePageReq, rsp *proto
 		niuhe.LogInfo("%v", err)
 		return err
 	}
+	aliyun := aliyunoss.NewAliyun()
 	rsp.Total = total
 	choices := consts.FileVendorEnum.GetChoices()
 	for _, row := range rows {
 		file := &protos.V1FileItem{
 			Id:         row.Id,
 			Name:       row.Name,
-			Url:        row.Path,
+			Url:        aliyun.SignUrl(row.Path, time.Hour*1),
 			Vendor:     row.Vendor,
 			Key:        row.Key,
 			CreateTime: row.CreateTime.Format(consts.FullTimeLayout),
