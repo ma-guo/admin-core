@@ -50,14 +50,23 @@ func (aliyun *Aliyun) getBucket() (*oss.Bucket, error) {
 }
 
 // Upload 上传文件到阿里云
-func (aliyun *Aliyun) Upload(localFile, name string) (string, string, error) {
+func (aliyun *Aliyun) Upload(localFile, name, fileType string) (string, string, error) {
 	bucket, err := aliyun.getBucket()
 	if err != nil {
 		return "", "", err
 	}
-
+	// 获取文件的 Content-Type
+	contentType, err := getContentType(localFile)
+	if err != nil {
+		niuhe.LogInfo("Get content type error: %v", err)
+		return "", "", err
+	}
+	// niuhe.LogInfo("fileInfo: %v, %v, %v, %v", name, localFile, contentType, fileType)
+	if fileType != "" {
+		contentType = fileType
+	}
 	key := fmt.Sprintf("%s/%s", aliyun.prefix, name)
-	err = bucket.PutObjectFromFile(key, localFile)
+	err = bucket.PutObjectFromFile(key, localFile, oss.ContentType(contentType))
 	if err != nil {
 		niuhe.LogInfo("Put object error: %v", err)
 		return "", "", err

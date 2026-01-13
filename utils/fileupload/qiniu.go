@@ -38,7 +38,7 @@ func NewQiniu(dict map[string]string) *Qiniu {
 }
 
 // 上传文件到七牛云, name 即为 key
-func (niu *Qiniu) Upload(localFile, name string) (string, string, error) {
+func (niu *Qiniu) Upload(localFile, name, fileType string) (string, string, error) {
 	policy := storage.PutPolicy{
 		Scope: niu.bucket,
 	}

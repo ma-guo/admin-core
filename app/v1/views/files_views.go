@@ -44,6 +44,8 @@ func (v *Files) Upload_POST(c *niuhe.Context, req *protos.NoneReq, rsp *protos.V
 		niuhe.LogInfo("%v", err)
 		return err
 	}
+	fileType := c.Request.FormValue("File-Type")
+
 	tmpFileName := strings.Join([]string{time.Now().Format("060102150405"), header.Filename}, "-")
 	tmpFile, err := utils.GetTmpFileName(tmpFileName)
 	if err != nil {
@@ -102,7 +104,7 @@ func (v *Files) Upload_POST(c *niuhe.Context, req *protos.NoneReq, rsp *protos.V
 		providor = fileupload.NewTencent(dicts)
 	}
 	if providor != nil {
-		ossUrl, key, err := providor.Upload(tmpFile, tmpFileName)
+		ossUrl, key, err := providor.Upload(tmpFile, tmpFileName, fileType)
 		if err != nil {
 			niuhe.LogInfo("%v", err)
 			return err

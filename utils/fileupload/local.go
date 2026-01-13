@@ -29,7 +29,7 @@ func NewLocal(dict map[string]string) *Local {
 }
 
 // 上传文件到七牛云, name 即为 key
-func (local *Local) Upload(localFile, name string) (string, string, error) {
+func (local *Local) Upload(localFile, name, fileType string) (string, string, error) {
 	fileDir := local.ossurl
 	if fileDir == "" {
 

@@ -49,7 +49,7 @@ func (tencent *Tencent) getClient() (*cos.Client, error) {
 	return client, nil
 }
 
-func (tencent *Tencent) Upload(localFile, name string) (string, string, error) {
+func (tencent *Tencent) Upload(localFile, name, fileType string) (string, string, error) {
 	client, err := tencent.getClient()
 	if err != nil {
 		niuhe.LogInfo("%v", err)
