@@ -8,6 +8,7 @@ import (
 
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 	"github.com/ma-guo/admin-core/app/common/consts"
+	"github.com/ma-guo/admin-core/config"
 	"github.com/ma-guo/admin-core/xorm/services"
 	"github.com/ma-guo/niuhe"
 	cache "github.com/patrickmn/go-cache"
@@ -70,7 +71,7 @@ func NewAliyun() *Aliyun {
 
 // 添加 aliyun oss 访问 url
 func (ali *Aliyun) SignUrl(fileUrl string, expires time.Duration) string {
-	if !ali.isAliyun {
+	if !ali.isAliyun || !config.Config.OssEncodeUrl {
 		return fileUrl
 	}
 	if !strings.Contains(fileUrl, ali.Endpoint) {

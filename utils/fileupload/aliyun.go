@@ -66,7 +66,7 @@ func (aliyun *Aliyun) Upload(localFile, name, fileType string) (string, string, 
 		contentType = fileType
 	}
 	key := fmt.Sprintf("%s/%s", aliyun.prefix, name)
-	err = bucket.PutObjectFromFile(key, localFile, oss.ContentType(contentType))
+	err = bucket.PutObjectFromFile(key, localFile, oss.ContentType(contentType), oss.ContentDisposition("inine"))
 	if err != nil {
 		niuhe.LogInfo("Put object error: %v", err)
 		return "", "", err

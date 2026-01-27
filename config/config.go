@@ -23,10 +23,11 @@ type AdminConfig struct {
 		Main    string // 数据库链接信息 dataSourceName
 	}
 	// Filedir    string // 文件存储目录
-	Host       string // http + 域名
-	Fileprefix string // OSS文件前缀
-	Templates  string // 模板目录
-	Secretkey  string // bearer secret key
+	Host         string // http + 域名
+	Fileprefix   string // OSS文件前缀
+	Templates    string // 模板目录
+	Secretkey    string // bearer secret key
+	OssEncodeUrl bool   // oss 是否开启签名 url
 	// TODO 在这下面添加其他配置内容
 }
 
