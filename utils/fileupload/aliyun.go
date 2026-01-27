@@ -17,6 +17,7 @@ type Aliyun struct {
 	bucketName string // bucketName
 	ossurl     string // ossurl
 	prefix     string
+	host       string
 }
 
 func NewAliyun(dict map[string]string) *Aliyun {
@@ -27,6 +28,7 @@ func NewAliyun(dict map[string]string) *Aliyun {
 		endpoint:   dao.find(consts.FileEndpoint),
 		bucketName: dao.find(consts.FileBucket),
 		prefix:     dao.find(consts.FilePrefix),
+		host:       dao.find(consts.FileOssurl),
 	}
 	yun.ossurl = fmt.Sprintf("https://%s.%s", yun.bucketName, yun.endpoint)
 	return yun
@@ -71,8 +73,12 @@ func (aliyun *Aliyun) Upload(localFile, name, fileType string) (string, string, 
 		niuhe.LogInfo("Put object error: %v", err)
 		return "", "", err
 	}
+	host := aliyun.host
+	if host == "" {
+		host = aliyun.ossurl
+	}
 
-	return fmt.Sprintf("%s/%s", aliyun.ossurl, key), key, nil
+	return fmt.Sprintf("%s/%s", host, key), key, nil
 }
 
 func (aliyun *Aliyun) Delete(key string) error {

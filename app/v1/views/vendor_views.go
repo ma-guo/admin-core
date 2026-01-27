@@ -90,7 +90,7 @@ func (v *Vendor) Init_GET(c *niuhe.Context, req *protos.NoneReq, rsp *protos.Non
 	actionAppend(consts.FileVendorEnum.Aliyun, consts.FileSecretKey, "AccessKeySecret", "阿里云访问密钥", "")
 	actionAppend(consts.FileVendorEnum.Aliyun, consts.FileBucket, "BucketName", "阿里云存储空间名称", "")
 	actionAppend(consts.FileVendorEnum.Aliyun, consts.FileEndpoint, "Endpoint", "阿里云OSS端点", "")
-	// actionAppend(consts.FileVendorEnum.Aliyun, consts.FileOssurl, "AliyunOssHost", "阿里云访问域名", "")
+	actionAppend(consts.FileVendorEnum.Aliyun, consts.FileOssurl, "AliyunOssHost", "阿里云访问域名", "")
 	actionAppend(consts.FileVendorEnum.Aliyun, consts.FilePrefix, "文件前缀", "阿里云存储前缀", prefix)
 
 	// 腾讯云
